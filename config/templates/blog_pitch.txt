@@ -1,0 +1,25 @@
+Subject: {Pitch|Music Submission|Story Idea}: {{Track_Name}} - Kxrn Gupta ({New Single|Fresh Sound})
+
+{Hey|Hi|Hello} {{First_Name}},
+
+{Hope you're having a great week|Hope all is well with you|Hope you're doing well}.
+
+{I've been following your coverage on {{Publication}}|I've been a fan of your music curation on {{Publication}}|I came across your recent work on {{Publication}}}, especially {your piece on {{Recent_Article}}|your perspective on {{Recent_Article}}|your latest indie & hip-hop spotlights}.
+
+I'm reaching out because I just released a new track titled **"{{Track_Name}}"**, blending {lo-fi atmospheric textures|gritty 808s and emotive melodies|Desi-influenced melodic soundscapes} with punchy storytelling. 
+
+Given your taste in {groundbreaking indie sounds|contemporary Desi hip-hop and lo-fi|emerging independent artists}, I thought this might be a great fit for {{Publication}}'s readers.
+
+🎧 **Listen here:** {{Stream_Link}}
+📁 **EPK & Press Photos:** {{Artist_Bio_Link}}
+
+{Would love to hear your thoughts if you get a chance to check it out.|Let me know if this resonates or if you'd like a quick quote/interview for an upcoming feature.|Happy to send over WAV files or high-res artwork if you're interested in covering it.}
+
+{Best regards|Cheers|Warm regards},
+
+Kxrn Gupta
+Independent Producer & Artist
+{{Sender_Email}}
+
+---
+*P.S. If you're not accepting submissions right now or prefer not to get future updates, just reply 'pass' and I will respect your inbox.*

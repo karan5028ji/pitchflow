@@ -1,0 +1,13 @@
+Subject: Re: {{Original_Subject}}
+
+{Hey|Hi} {{First_Name}},
+
+{Just floating this back to the top of your inbox in case it got buried under submissions earlier this week.|Quick follow-up on my note below—know how chaotic inbox curation can get!|Hope you're having a smooth week! Wanted to quickly check if you had a moment to check out "{{Track_Name}}".}
+
+No worries if it's not the right match for {{Publication}} at the moment—just wanted to share it before our next release campaign kicks off.
+
+Here's the direct stream link once more for quick reference: {{Stream_Link}}
+
+{Appreciate your time either way|Thanks again for your time|Thanks so much for considering it},
+
+Kxrn

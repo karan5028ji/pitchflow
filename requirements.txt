@@ -1,0 +1,21 @@
+# Core & Networking
+requests>=2.31.0
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+python-dotenv>=1.0.0
+
+# CLI & UX
+rich>=13.7.0
+typer>=0.9.0
+
+# Email API & OAuth (optional Gmail API)
+google-api-python-client>=2.115.0
+google-auth-oauthlib>=1.2.0
+google-auth-httplib2>=0.2.0
+
+# Serverless Tracking API
+fastapi>=0.109.0
+uvicorn>=0.27.0
+
+# Testing
+pytest>=7.4.0

@@ -1,0 +1,23 @@
+Subject: {Playlist Submission|Curator Pitch}: {{Track_Name}} for {{Publication}}
+
+{Hey|Hi|Hello} {{First_Name}},
+
+{Hope you're having a productive week|Hope your week is going great|Hope you're doing well}.
+
+{Huge fan of your playlist {{Publication}}|I regularly tune into your playlist curation on {{Publication}}|I've been listening to {{Publication}} and love the vibe you've built}. 
+
+I recently put out a track called **"{{Track_Name}}"** that matches the mood and sonic aesthetic of your recent selections{, especially next to artists like {{Recent_Article}}|}.
+
+It's a blend of {late-night melodic lo-fi|chill Desi hip-hop rhythms|dreamy ambient synths and downtempo beats} that flows really well into study, drive, and chill sessions.
+
+🎧 **Stream on Spotify / Apple:** {{Stream_Link}}
+
+If you think it fits {{Publication}}, I'd be honored to have it considered for a spot. Either way, appreciate you keeping independent curation alive!
+
+{Cheers|Best|Thanks for listening},
+
+Kxrn Gupta
+{{Sender_Email}}
+
+---
+*P.S. If you'd rather not receive music submissions here, just let me know with a quick reply.*
