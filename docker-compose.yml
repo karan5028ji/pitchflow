@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  pr-studio:
+    build: .
+    container_name: kxrn-pr-studio
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./config/templates:/app/config/templates
+    environment:
+      - PORT=8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
