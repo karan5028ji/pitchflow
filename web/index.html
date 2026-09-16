@@ -1,0 +1,2224 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Kxrn PR Outreach Studio — Cupertino Edition</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  
+  <!-- Apple Human Interface Fonts: SF / Inter & SF Mono / JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"SF Pro Display"', 'Inter', 'system-ui', 'sans-serif'],
+            mono: ['"SF Mono"', '"JetBrains Mono"', 'Menlo', 'monospace'],
+          },
+          colors: {
+            brand: {
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-canvas: #060609;
+      --surface-card: rgba(255, 255, 255, 0.032);
+      --surface-elevated: rgba(255, 255, 255, 0.055);
+      --surface-glass: rgba(14, 15, 23, 0.78);
+      --hairline: rgba(255, 255, 255, 0.065);
+      --hairline-hover: rgba(255, 255, 255, 0.14);
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: #f1f3f9;
+      letter-spacing: -0.012em;
+    }
+
+    /* Apple Glassmorphic & Depth Materials */
+    .cupertino-glass {
+      background: var(--surface-glass);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid var(--hairline);
+    }
+
+    .card-material {
+      background: var(--surface-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--hairline);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25), 0 8px 24px -6px rgba(0, 0, 0, 0.45);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .card-material:hover {
+      border-color: var(--hairline-hover);
+      transform: translateY(-1.5px);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 16px 36px -8px rgba(0, 0, 0, 0.65);
+    }
+
+    .card-flat {
+      background: var(--surface-card);
+      border: 1px solid var(--hairline);
+    }
+
+    /* Tactile Apple Buttons */
+    .btn-apple-primary {
+      background: linear-gradient(180deg, #6366f1 0%, #4f46e5 100%);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.22) inset, 0 4px 14px -2px rgba(99, 102, 241, 0.45);
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-apple-primary:hover {
+      background: linear-gradient(180deg, #7174f8 0%, #5850ee 100%);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 6px 20px -2px rgba(99, 102, 241, 0.6);
+      transform: translateY(-0.5px);
+    }
+    .btn-apple-primary:active {
+      transform: scale(0.98) translateY(0.5px);
+      box-shadow: 0 2px 8px -1px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-apple-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-apple-secondary:hover {
+      background: rgba(255, 255, 255, 0.085);
+      border-color: rgba(255, 255, 255, 0.14);
+      transform: translateY(-0.5px);
+    }
+    .btn-apple-secondary:active {
+      transform: scale(0.98);
+    }
+
+    /* Subtle Native Inputs */
+    .input-apple {
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.075);
+      color: #f1f3f9;
+      transition: all 0.18s ease;
+    }
+    .input-apple:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.055);
+      border-color: rgba(99, 102, 241, 0.65);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+    }
+
+    /* Smooth Segmented Control */
+    .segmented-control {
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.065);
+      padding: 3px;
+      border-radius: 14px;
+    }
+    .segmented-btn {
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .segmented-btn.active {
+      background: rgba(255, 255, 255, 0.09);
+      color: #ffffff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Ambient Background Radial Lights */
+    .ambient-glow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: 
+        radial-gradient(circle 700px at 15% 10%, rgba(99, 102, 241, 0.07), transparent 70%),
+        radial-gradient(circle 600px at 85% 85%, rgba(139, 92, 246, 0.05), transparent 70%);
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+
+    /* Keyframes */
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.45; transform: scale(0.92); }
+    }
+    .pulse-dot { animation: pulse-subtle 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .tab-section { animation: fadeSlideUp 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+    @keyframes toastEnter {
+      from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .toast-enter { animation: toastEnter 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .toast-leave { opacity: 0; transform: translateY(-6px) scale(0.95); transition: all 0.2s ease; }
+
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.94) translateY(12px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-sheet { animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    
+    #mobile-drawer {
+      transform: translateX(-100%);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #mobile-drawer.open { transform: translateX(0); }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col relative overflow-x-hidden">
+  <!-- Ambient Backdrop -->
+  <div class="ambient-glow"></div>
+
+  <!-- Toast Notification Stack (Pinned Top Right) -->
+  <div id="toast-shelf" class="fixed top-5 right-5 z-[100] flex flex-col gap-2.5 pointer-events-none max-w-sm w-full"></div>
+
+  <!-- Mobile Navigation Drawer & Backdrop -->
+  <div id="mobile-overlay" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-md transition-opacity" onclick="toggleMobileMenu()"></div>
+  <aside id="mobile-drawer" class="fixed left-0 top-0 bottom-0 w-72 z-50 cupertino-glass flex flex-col border-r border-white/10 shadow-2xl">
+    <div class="p-5 flex items-center justify-between border-b border-white/[0.06]">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-2xl flex items-center justify-center bg-gradient-to-tr from-indigo-600 to-indigo-400 shadow-md shadow-indigo-500/20">
+          <i data-lucide="radio" class="w-4 h-4 text-white"></i>
+        </div>
+        <div>
+          <h2 class="text-sm font-semibold text-white tracking-tight">Kxrn PR Studio</h2>
+          <span class="text-[10px] font-mono text-indigo-400 tracking-wider uppercase">Cupertino Pro</span>
+        </div>
+      </div>
+      <button onclick="toggleMobileMenu()" class="p-1.5 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    </div>
+    <nav id="mobile-nav-items" class="flex-1 p-3.5 space-y-1 overflow-y-auto"></nav>
+    <div class="p-4 border-t border-white/[0.06] text-[11px] text-gray-500 font-mono text-center">
+      Engine v2.1.0 • High-End Music Outreach
+    </div>
+  </aside>
+
+  <!-- Cupertino Top Navigation Bar -->
+  <header class="sticky top-0 z-40 cupertino-glass px-5 lg:px-8 py-3.5 border-b border-white/[0.06] flex items-center justify-between shadow-sm">
+    <!-- Brand Identity -->
+    <div class="flex items-center gap-3.5">
+      <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl text-gray-400 hover:text-white hover:bg-white/5 transition">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
+      <div class="w-9 h-9 rounded-2xl flex items-center justify-center bg-gradient-to-tr from-indigo-600 to-indigo-400 shadow-md shadow-indigo-500/25 flex-shrink-0">
+        <i data-lucide="radio" class="w-4 h-4 text-white"></i>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-sm lg:text-base text-white tracking-tight">Kxrn PR Studio</span>
+          <span class="text-[9px] font-mono tracking-widest uppercase bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 px-2 py-0.5 rounded-full hidden sm:inline">Enterprise</span>
+        </div>
+        <p class="text-[11px] text-gray-400 hidden sm:block">Automated Music Journalism &amp; Playlisting Engine</p>
+      </div>
+    </div>
+
+    <!-- Segmented Center Tabs (Desktop) -->
+    <nav class="hidden md:flex items-center segmented-control">
+      <button onclick="switchTab('dashboard')" id="nav-dashboard" class="segmented-btn px-4 py-1.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white flex items-center gap-2">
+        <i data-lucide="layout-dashboard" class="w-3.5 h-3.5"></i> Dashboard
+      </button>
+      <button onclick="switchTab('crm')" id="nav-crm" class="segmented-btn px-4 py-1.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white flex items-center gap-2">
+        <i data-lucide="users" class="w-3.5 h-3.5"></i> CRM Pipeline
+      </button>
+      <button onclick="switchTab('composer')" id="nav-composer" class="segmented-btn px-4 py-1.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white flex items-center gap-2">
+        <i data-lucide="mail" class="w-3.5 h-3.5"></i> Pitch Composer
+      </button>
+      <button onclick="switchTab('campaign')" id="nav-campaign" class="segmented-btn px-4 py-1.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white flex items-center gap-2">
+        <i data-lucide="send" class="w-3.5 h-3.5"></i> Dispatcher
+      </button>
+      <button onclick="switchTab('inbox')" id="nav-inbox" class="segmented-btn px-4 py-1.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white flex items-center gap-2">
+        <i data-lucide="inbox" class="w-3.5 h-3.5"></i> Inbox Scanner
+      </button>
+      <button onclick="switchTab('settings')" id="nav-settings" class="segmented-btn px-4 py-1.5 rounded-xl text-xs font-medium text-gray-400 hover:text-white flex items-center gap-2">
+        <i data-lucide="settings" class="w-3.5 h-3.5"></i> Settings
+      </button>
+    </nav>
+
+    <!-- Top Right Actions & Status Badges -->
+    <div class="flex items-center gap-3">
+      <!-- Weekend Blocker Status Badge -->
+      <div id="weekend-pill" class="flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono border border-emerald-500/20 bg-emerald-500/10 text-emerald-300">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 pulse-dot"></span>
+        <span id="weekend-pill-text">Weekday Active</span>
+      </div>
+
+      <!-- Quota Indicator -->
+      <div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full text-xs card-flat bg-white/[0.03]">
+        <span class="text-gray-400 font-medium">Daily Quota</span>
+        <span id="header-quota-text" class="font-mono font-semibold text-white tabular-nums">0/30</span>
+      </div>
+
+      <!-- Quick Launch Button -->
+      <button onclick="switchTab('campaign')" class="btn-apple-primary text-white text-xs font-semibold px-4 py-1.5 rounded-xl flex items-center gap-1.5">
+        <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+        <span>Launch</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main View Container -->
+  <main class="flex-1 max-w-[1440px] w-full mx-auto p-5 sm:p-7 space-y-6 relative z-10">
+
+    <!-- ===================================================================== -->
+    <!-- TAB 1: DASHBOARD                                                      -->
+    <!-- ===================================================================== -->
+    <section id="tab-dashboard" class="space-y-6 tab-section">
+      <!-- Hero Campaign Card -->
+      <div class="relative overflow-hidden rounded-3xl p-7 lg:p-9 border border-indigo-500/20 bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-black/40 shadow-xl backdrop-blur-xl">
+        <div class="absolute -top-24 -right-24 w-80 h-80 bg-indigo-500/15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="space-y-2 max-w-xl">
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-mono font-semibold uppercase tracking-widest text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">Active Outreach Campaign</span>
+            </div>
+            <h1 class="text-2xl lg:text-3xl font-bold tracking-tight text-white">
+              Pitching <span id="dash-track-name" class="text-indigo-300 font-semibold">"Midnight Reverie"</span>
+            </h1>
+            <p class="text-sm text-gray-300 leading-relaxed">
+              Targeted high-touch outreach to verified music bloggers, tastemakers, and playlist curators with 1x1 pixel tracking.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button onclick="openModal('modal-add-curator')" class="btn-apple-secondary text-xs font-semibold px-4 py-2.5 rounded-xl text-white flex items-center gap-2">
+              <i data-lucide="user-plus" class="w-4 h-4 text-indigo-400"></i> Add Curator
+            </button>
+            <button onclick="openModal('modal-import-csv')" class="btn-apple-secondary text-xs font-semibold px-4 py-2.5 rounded-xl text-white flex items-center gap-2">
+              <i data-lucide="upload-cloud" class="w-4 h-4 text-indigo-400"></i> Import CSV
+            </button>
+            <button onclick="openModal('modal-test-pitch')" class="btn-apple-secondary text-xs font-semibold px-4 py-2.5 rounded-xl text-emerald-300 border-emerald-500/25 bg-emerald-500/10 flex items-center gap-2">
+              <i data-lucide="flask-conical" class="w-4 h-4"></i> Test Pitch
+            </button>
+            <button onclick="scanInbox()" class="btn-apple-secondary text-xs font-semibold px-4 py-2.5 rounded-xl text-indigo-300 border-indigo-500/25 bg-indigo-500/10 flex items-center gap-2">
+              <i data-lucide="refresh-cw" class="w-4 h-4"></i> Scan Replies
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seven Key Pipeline Metrics -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3.5">
+        <!-- Total -->
+        <div class="card-material rounded-2xl p-4 flex flex-col justify-between">
+          <div class="flex items-center justify-between text-gray-400 mb-2">
+            <span class="text-[10px] uppercase font-mono tracking-wider">Total</span>
+            <i data-lucide="database" class="w-3.5 h-3.5"></i>
+          </div>
+          <div id="metric-total" class="text-3xl font-bold font-mono text-white tabular-nums tracking-tight">0</div>
+          <span class="text-[11px] text-gray-400 mt-1">Verified Curators</span>
+        </div>
+
+        <!-- To Contact -->
+        <div class="card-material rounded-2xl p-4 flex flex-col justify-between border-amber-500/20 bg-amber-500/[0.02]">
+          <div class="flex items-center justify-between text-amber-400 mb-2">
+            <span class="text-[10px] uppercase font-mono tracking-wider">Queue</span>
+            <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+          </div>
+          <div id="metric-tocontact" class="text-3xl font-bold font-mono text-amber-400 tabular-nums tracking-tight">0</div>
+          <span class="text-[11px] text-gray-400 mt-1">Ready for Pitch</span>
+        </div>
+
+        <!-- Sent -->
+        <div class="card-material rounded-2xl p-4 flex flex-col justify-between border-indigo-500/20 bg-indigo-500/[0.02]">
+          <div class="flex items-center justify-between text-indigo-400 mb-2">
+            <span class="text-[10px] uppercase font-mono tracking-wider">Sent</span>
+            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+          </div>
+          <div id="metric-sent" class="text-3xl font-bold font-mono text-indigo-400 tabular-nums tracking-tight">0</div>
+          <span class="text-[11px] text-gray-400 mt-1">Cold Pitches Out</span>
+        </div>
+
+        <!-- Opened -->
+        <div class="card-material rounded-2xl p-4 flex flex-col justify-between border-purple-500/20 bg-purple-500/[0.02]">
+          <div class="flex items-center justify-between text-purple-400 mb-2">
+            <span class="text-[10px] uppercase font-mono tracking-wider">Opened</span>
+            <i data-lucide="eye" class="w-3.5 h-3.5"></i>
+          </div>
+          <div id="metric-opened" class="text-3xl font-bold font-mono text-purple-400 tabular-nums tracking-tight">0</div>
+          <span class="text-[11px] text-gray-400 mt-1">Pixel Confirmed</span>
+        </div>
+
+        <!-- Replied -->
+        <div class="card-material rounded-2xl p-4 flex flex-col justify-between border-emerald-500/20 bg-emerald-500/[0.02]">
+          <div class="flex items-center justify-between text-emerald-400 mb-2">
+            <span class="text-[10px] uppercase font-mono tracking-wider">Replied</span>
+            <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
+          </div>
+          <div id="metric-replied" class="text-3xl font-bold font-mono text-emerald-400 tabular-nums tracking-tight">0</div>
+          <span class="text-[11px] text-gray-400 mt-1">Direct Interest</span>
+        </div>
+
+        <!-- Follow-up -->
+        <div class="card-material rounded-2xl p-4 flex flex-col justify-between border-blue-500/20 bg-blue-500/[0.02]">
+          <div class="flex items-center justify-between text-blue-400 mb-2">
+            <span class="text-[10px] uppercase font-mono tracking-wider">Follow-up</span>
+            <i data-lucide="repeat" class="w-3.5 h-3.5"></i>
+          </div>
+          <div id="metric-followup" class="text-3xl font-bold font-mono text-blue-400 tabular-nums tracking-tight">0</div>
+          <span class="text-[11px] text-gray-400 mt-1">In-thread Nudge</span>
+        </div>
+
+        <!-- Blacklisted -->
+        <div class="card-material rounded-2xl p-4 flex flex-col justify-between border-rose-500/20 bg-rose-500/[0.02]">
+          <div class="flex items-center justify-between text-rose-400 mb-2">
+            <span class="text-[10px] uppercase font-mono tracking-wider">Opt-outs</span>
+            <i data-lucide="user-x" class="w-3.5 h-3.5"></i>
+          </div>
+          <div id="metric-blacklisted" class="text-3xl font-bold font-mono text-rose-400 tabular-nums tracking-tight">0</div>
+          <span class="text-[11px] text-gray-400 mt-1">Auto-Blacklisted</span>
+        </div>
+      </div>
+
+      <!-- Deliverability & Safety Guidance Card -->
+      <div class="card-flat rounded-2xl p-4.5 border-amber-500/20 bg-amber-500/[0.035] flex items-start gap-4">
+        <div class="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/25 flex items-center justify-center flex-shrink-0 text-amber-400">
+          <i data-lucide="shield-alert" class="w-4 h-4"></i>
+        </div>
+        <div class="space-y-1 text-xs">
+          <h4 class="font-semibold text-amber-300">Deliverability Rules: Zero MP3 Attachments</h4>
+          <p class="text-gray-400 leading-relaxed">
+            Cold emails containing audio attachments trigger Google Spam filters. The engine only sends private SoundCloud/Spotify links and cloud EPK press kits, maintaining a 99% primary inbox placement rate.
+          </p>
+        </div>
+      </div>
+
+      <!-- Health Status and Recent Activity Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Sender Engine Health -->
+        <div class="card-material rounded-2xl p-6 space-y-5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center">
+                <i data-lucide="shield-check" class="w-4 h-4"></i>
+              </div>
+              <h3 class="text-sm font-bold text-white">Sender Health</h3>
+            </div>
+            <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full border border-emerald-500/25 bg-emerald-500/10 text-emerald-300">Optimal</span>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex justify-between text-xs">
+              <span class="text-gray-400">Daily Dispatch Quota</span>
+              <span id="dash-quota-counter" class="font-mono font-semibold text-white">0 / 30</span>
+            </div>
+            <div class="w-full h-2 rounded-full bg-white/[0.06] overflow-hidden">
+              <div id="dash-quota-progress" class="h-full bg-gradient-to-r from-indigo-500 to-emerald-400 rounded-full transition-all duration-700" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-white/[0.06] space-y-3 text-xs">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-400">Human Cadence Delay</span>
+              <span class="font-mono text-gray-200">180s – 420s random</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-400">Anti-Pattern Spintax</span>
+              <span class="font-mono text-emerald-400 flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5"></i> Active</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-400">Weekend Safeguard</span>
+              <span id="dash-weekend-status" class="font-mono text-emerald-400">Auto-Enforced</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Curators Table (Compact) -->
+        <div class="lg:col-span-2 card-material rounded-2xl p-6 space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <i data-lucide="clock" class="w-4 h-4 text-indigo-400"></i> Recent Pipeline Activity
+            </h3>
+            <button onclick="switchTab('crm')" class="text-xs text-indigo-400 hover:text-indigo-300 flex items-center gap-1 transition">
+              Open Full CRM <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+              <thead>
+                <tr class="text-gray-500 border-b border-white/[0.06]">
+                  <th class="pb-3 font-medium">Curator</th>
+                  <th class="pb-3 font-medium">Publication</th>
+                  <th class="pb-3 font-medium">Persona</th>
+                  <th class="pb-3 font-medium">Status</th>
+                  <th class="pb-3 font-medium text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody id="dash-recent-tbody" class="divide-y divide-white/[0.04] text-gray-300">
+                <tr>
+                  <td colspan="5" class="py-8 text-center text-gray-600">Loading pipeline leads...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===================================================================== -->
+    <!-- TAB 2: CRM PIPELINE                                                   -->
+    <!-- ===================================================================== -->
+    <section id="tab-crm" class="hidden space-y-5 tab-section">
+      <!-- Search, Filter & View Controls -->
+      <div class="card-flat rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div class="flex items-center gap-3 flex-1 flex-wrap">
+          <div class="relative min-w-[240px]">
+            <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+            <input type="text" id="crm-search-input" oninput="debouncedSearch()" placeholder="Search name, email, outlet..." class="input-apple pl-9 pr-3.5 py-1.5 rounded-xl text-xs w-full sm:w-64">
+          </div>
+          <select id="crm-filter-persona" onchange="filterCRM()" class="input-apple px-3 py-1.5 rounded-xl text-xs cursor-pointer">
+            <option value="all">All Personas</option>
+            <option value="Journalist">Journalists</option>
+            <option value="Playlist Curator">Playlist Curators</option>
+            <option value="A&R">A&R / Label</option>
+          </select>
+          <select id="crm-filter-status" onchange="filterCRM()" class="input-apple px-3 py-1.5 rounded-xl text-xs cursor-pointer">
+            <option value="all">All Statuses</option>
+            <option value="To Contact">To Contact</option>
+            <option value="Sent">Sent</option>
+            <option value="Opened">Opened</option>
+            <option value="Replied">Replied</option>
+            <option value="Follow-up Sent">Follow-up</option>
+            <option value="Blacklisted">Blacklisted</option>
+          </select>
+        </div>
+
+        <div class="flex items-center gap-2 self-end sm:self-auto">
+          <!-- View switcher -->
+          <div class="segmented-control flex items-center p-0.5">
+            <button onclick="setCRMView('kanban')" id="crm-view-kanban-btn" class="segmented-btn p-1.5 rounded-lg active">
+              <i data-lucide="kanban" class="w-3.5 h-3.5"></i>
+            </button>
+            <button onclick="setCRMView('table')" id="crm-view-table-btn" class="segmented-btn p-1.5 rounded-lg text-gray-400">
+              <i data-lucide="table" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+
+          <button onclick="openModal('modal-add-curator')" class="btn-apple-primary text-white text-xs font-semibold px-3.5 py-1.5 rounded-xl flex items-center gap-1.5">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Add Curator
+          </button>
+          <button onclick="openModal('modal-import-csv')" class="btn-apple-secondary text-white text-xs font-semibold px-3.5 py-1.5 rounded-xl flex items-center gap-1.5">
+            <i data-lucide="upload" class="w-3.5 h-3.5"></i> Import CSV
+          </button>
+        </div>
+      </div>
+
+      <!-- Kanban Board View -->
+      <div id="crm-kanban-view" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3.5 overflow-x-auto pb-4">
+        <!-- 1. To Contact -->
+        <div class="card-flat rounded-2xl p-3.5 flex flex-col min-h-[500px] border-amber-500/15 bg-amber-500/[0.015]">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/[0.06]">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+              <span class="text-xs font-semibold text-gray-300">To Contact</span>
+            </div>
+            <span id="kcount-tocontact" class="font-mono text-[10px] text-gray-400 bg-white/[0.05] px-2 py-0.5 rounded-full">0</span>
+          </div>
+          <div id="kanban-col-tocontact" class="flex-1 space-y-2.5 overflow-y-auto max-h-[660px]"></div>
+        </div>
+
+        <!-- 2. Sent -->
+        <div class="card-flat rounded-2xl p-3.5 flex flex-col min-h-[500px] border-indigo-500/15 bg-indigo-500/[0.015]">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/[0.06]">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+              <span class="text-xs font-semibold text-gray-300">Sent</span>
+            </div>
+            <span id="kcount-sent" class="font-mono text-[10px] text-gray-400 bg-white/[0.05] px-2 py-0.5 rounded-full">0</span>
+          </div>
+          <div id="kanban-col-sent" class="flex-1 space-y-2.5 overflow-y-auto max-h-[660px]"></div>
+        </div>
+
+        <!-- 3. Opened -->
+        <div class="card-flat rounded-2xl p-3.5 flex flex-col min-h-[500px] border-purple-500/15 bg-purple-500/[0.015]">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/[0.06]">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+              <span class="text-xs font-semibold text-gray-300">Opened</span>
+            </div>
+            <span id="kcount-opened" class="font-mono text-[10px] text-gray-400 bg-white/[0.05] px-2 py-0.5 rounded-full">0</span>
+          </div>
+          <div id="kanban-col-opened" class="flex-1 space-y-2.5 overflow-y-auto max-h-[660px]"></div>
+        </div>
+
+        <!-- 4. Replied -->
+        <div class="card-flat rounded-2xl p-3.5 flex flex-col min-h-[500px] border-emerald-500/15 bg-emerald-500/[0.015]">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/[0.06]">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span class="text-xs font-semibold text-gray-300">Replied</span>
+            </div>
+            <span id="kcount-replied" class="font-mono text-[10px] text-gray-400 bg-white/[0.05] px-2 py-0.5 rounded-full">0</span>
+          </div>
+          <div id="kanban-col-replied" class="flex-1 space-y-2.5 overflow-y-auto max-h-[660px]"></div>
+        </div>
+
+        <!-- 5. Follow-up Sent -->
+        <div class="card-flat rounded-2xl p-3.5 flex flex-col min-h-[500px] border-blue-500/15 bg-blue-500/[0.015]">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/[0.06]">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+              <span class="text-xs font-semibold text-gray-300">Follow-up</span>
+            </div>
+            <span id="kcount-followup" class="font-mono text-[10px] text-gray-400 bg-white/[0.05] px-2 py-0.5 rounded-full">0</span>
+          </div>
+          <div id="kanban-col-followup" class="flex-1 space-y-2.5 overflow-y-auto max-h-[660px]"></div>
+        </div>
+
+        <!-- 6. Blacklisted -->
+        <div class="card-flat rounded-2xl p-3.5 flex flex-col min-h-[500px] border-rose-500/15 bg-rose-500/[0.02]">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-white/[0.06]">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+              <span class="text-xs font-semibold text-rose-300">Blacklisted</span>
+            </div>
+            <span id="kcount-blacklisted" class="font-mono text-[10px] text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded-full">0</span>
+          </div>
+          <div id="kanban-col-blacklisted" class="flex-1 space-y-2.5 overflow-y-auto max-h-[660px]"></div>
+        </div>
+      </div>
+
+      <!-- Table View (Hidden by Default) -->
+      <div id="crm-table-view" class="hidden card-material rounded-2xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead>
+              <tr class="text-gray-400 uppercase font-mono text-[10px] tracking-wider border-b border-white/[0.06] bg-white/[0.02]">
+                <th class="px-5 py-3.5 font-medium">Name</th>
+                <th class="px-5 py-3.5 font-medium">Email</th>
+                <th class="px-5 py-3.5 font-medium">Outlet</th>
+                <th class="px-5 py-3.5 font-medium">Persona</th>
+                <th class="px-5 py-3.5 font-medium">Personalization Hook</th>
+                <th class="px-5 py-3.5 font-medium">Status</th>
+                <th class="px-5 py-3.5 font-medium">Opens</th>
+                <th class="px-5 py-3.5 font-medium text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="crm-table-tbody" class="divide-y divide-white/[0.04] text-gray-300"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===================================================================== -->
+    <!-- TAB 3: PITCH COMPOSER & PREVIEWER                                    -->
+    <!-- ===================================================================== -->
+    <section id="tab-composer" class="hidden space-y-6 tab-section">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Settings Column -->
+        <div class="lg:col-span-4 card-material rounded-2xl p-6 space-y-5">
+          <div class="border-b border-white/[0.06] pb-4">
+            <h2 class="text-sm font-bold text-white flex items-center gap-2">
+              <i data-lucide="sliders" class="w-4 h-4 text-indigo-400"></i> Pitch Parameters
+            </h2>
+            <p class="text-xs text-gray-400 mt-1">Select a recipient and watch the Spintax engine render unique variations.</p>
+          </div>
+
+          <div class="space-y-3.5 text-xs">
+            <div>
+              <label class="block text-gray-400 mb-1 font-medium">Select Curator from CRM</label>
+              <select id="comp-lead-select" onchange="debouncedPreview()" class="input-apple w-full px-3 py-2 rounded-xl">
+                <option value="">Sample Lead (Amit Sharma — Wild City)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-gray-400 mb-1 font-medium">Outreach Angle / Template</label>
+              <select id="comp-template-type" onchange="debouncedPreview()" class="input-apple w-full px-3 py-2 rounded-xl">
+                <option value="blog">Music Blog / Journalist Angle</option>
+                <option value="playlist">Playlist Curator Angle</option>
+                <option value="follow_up">In-Thread Follow-up Angle</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-gray-400 mb-1 font-medium">Featured Track Name</label>
+              <input type="text" id="comp-track-name" value="Midnight Reverie" oninput="debouncedPreview()" class="input-apple w-full px-3 py-2 rounded-xl">
+            </div>
+
+            <div>
+              <label class="block text-gray-400 mb-1 font-medium">Private Streaming Link</label>
+              <input type="url" id="comp-stream-link" value="https://open.spotify.com/artist/kxrn-gupta" oninput="debouncedPreview()" class="input-apple w-full px-3 py-2 rounded-xl">
+            </div>
+
+            <div>
+              <label class="block text-gray-400 mb-1 font-medium">Press Kit / EPK Link</label>
+              <input type="url" id="comp-bio-link" value="https://kxrn.is-a.dev/press" oninput="debouncedPreview()" class="input-apple w-full px-3 py-2 rounded-xl">
+            </div>
+
+            <div class="pt-2 space-y-2">
+              <button onclick="renderPitchPreview()" class="w-full btn-apple-secondary text-indigo-300 font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2">
+                <i data-lucide="dices" class="w-4 h-4"></i> Spin Variation
+              </button>
+              <button onclick="setComposerMode('editor')" class="w-full btn-apple-secondary text-purple-300 border-purple-500/25 bg-purple-500/10 font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2">
+                <i data-lucide="edit-3" class="w-4 h-4"></i> Edit Mail Body / Template
+              </button>
+              <button onclick="openModal('modal-test-pitch')" class="w-full btn-apple-secondary text-emerald-300 border-emerald-500/25 bg-emerald-500/10 font-semibold py-2.5 rounded-xl flex items-center justify-center gap-2">
+                <i data-lucide="flask-conical" class="w-4 h-4"></i> Send Test to Device
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rendered Email Preview & Direct Pitch Editor Column (Apple Mail / Gmail style) -->
+        <div class="lg:col-span-8 flex flex-col space-y-4">
+          <div class="card-material rounded-2xl overflow-hidden flex flex-col shadow-2xl flex-1 border-white/[0.08]">
+            <!-- Window Titlebar & Mode Switcher -->
+            <div class="px-5 py-3 border-b border-white/[0.06] bg-white/[0.02] flex items-center justify-between flex-wrap gap-2">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+                
+                <!-- Editor Mode Segmented Switcher -->
+                <div class="segmented-control flex items-center p-0.5 ml-3">
+                  <button onclick="setComposerMode('preview')" id="btn-mode-preview" class="segmented-btn px-3 py-1 rounded-lg text-xs font-medium active flex items-center gap-1.5">
+                    <i data-lucide="eye" class="w-3.5 h-3.5"></i> Live Preview
+                  </button>
+                  <button onclick="setComposerMode('editor')" id="btn-mode-editor" class="segmented-btn px-3 py-1 rounded-lg text-xs font-medium text-gray-400 hover:text-white flex items-center gap-1.5">
+                    <i data-lucide="edit-3" class="w-3.5 h-3.5"></i> Edit Pitch &amp; Template
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <button onclick="saveCurrentTemplate()" id="btn-save-tpl" class="hidden btn-apple-secondary text-indigo-300 text-xs px-3 py-1 rounded-lg font-medium flex items-center gap-1">
+                  <i data-lucide="save" class="w-3.5 h-3.5"></i> Save Template
+                </button>
+                <div class="flex items-center gap-1.5 text-[10px] font-mono text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-500/20">
+                  <i data-lucide="crosshair" class="w-3.5 h-3.5"></i> Tracking Pixel Armed
+                </div>
+              </div>
+            </div>
+
+            <!-- Email Meta Header (Interactive Subject Line!) -->
+            <div class="p-5 border-b border-white/[0.06] space-y-2.5 text-xs bg-white/[0.015]">
+              <div class="flex items-center gap-3">
+                <span class="text-gray-400 w-16">From:</span>
+                <span id="preview-meta-from" class="text-gray-200 font-medium font-mono">Kxrn Gupta &lt;chitesh.gupta@gmail.com&gt;</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-gray-400 w-16">To:</span>
+                <span id="preview-meta-to" class="text-gray-200 font-mono">amit.sharma@wildcity.test</span>
+              </div>
+              <div class="flex items-center gap-3 pt-2 border-t border-white/[0.04]">
+                <span class="text-gray-400 w-16 font-semibold">Subject:</span>
+                <input type="text" id="comp-subject-input" oninput="onCustomSubjectChange()" class="input-apple flex-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-white placeholder-gray-500" placeholder="Pitch Subject line...">
+              </div>
+            </div>
+
+            <!-- View 1: Rendered HTML Email Body Preview -->
+            <div id="composer-preview-view" class="p-8 flex-1 overflow-y-auto text-sm leading-relaxed text-gray-200 bg-[#08080d] min-h-[380px]">
+              Generating dynamic spintax preview...
+            </div>
+
+            <!-- View 2: Raw Template & Pitch Editor -->
+            <div id="composer-editor-view" class="hidden flex-1 flex flex-col p-5 bg-[#08080d] space-y-3">
+              <!-- Quick Insert Tags Bar -->
+              <div class="flex items-center gap-1.5 flex-wrap pb-2 border-b border-white/[0.06]">
+                <span class="text-[10px] font-mono text-gray-500 uppercase tracking-wider mr-1">Insert Tokens:</span>
+                <button type="button" onclick="insertToken('{{First_Name}}')" class="btn-apple-secondary px-2 py-0.5 rounded-md text-[11px] font-mono text-indigo-300 hover:text-white">{{First_Name}}</button>
+                <button type="button" onclick="insertToken('{{Track_Name}}')" class="btn-apple-secondary px-2 py-0.5 rounded-md text-[11px] font-mono text-indigo-300 hover:text-white">{{Track_Name}}</button>
+                <button type="button" onclick="insertToken('{{Publication}}')" class="btn-apple-secondary px-2 py-0.5 rounded-md text-[11px] font-mono text-indigo-300 hover:text-white">{{Publication}}</button>
+                <button type="button" onclick="insertToken('{{Stream_Link}}')" class="btn-apple-secondary px-2 py-0.5 rounded-md text-[11px] font-mono text-indigo-300 hover:text-white">{{Stream_Link}}</button>
+                <button type="button" onclick="insertToken('{{Artist_Bio_Link}}')" class="btn-apple-secondary px-2 py-0.5 rounded-md text-[11px] font-mono text-indigo-300 hover:text-white">{{Artist_Bio_Link}}</button>
+                <button type="button" onclick="insertToken('{{Recent_Article}}')" class="btn-apple-secondary px-2 py-0.5 rounded-md text-[11px] font-mono text-indigo-300 hover:text-white">{{Recent_Article}}</button>
+                <button type="button" onclick="insertToken('{Hey|Hi|Hello}')" class="btn-apple-secondary px-2 py-0.5 rounded-md text-[11px] font-mono text-amber-300 hover:text-white">{Spintax}</button>
+              </div>
+
+              <!-- Editor Textarea -->
+              <textarea id="comp-template-editor" rows="15" oninput="onCustomBodyChange()" class="input-apple flex-1 w-full p-4 rounded-xl font-mono text-xs text-gray-200 leading-relaxed resize-y focus:outline-none" placeholder="Write or customize your pitch template here..."></textarea>
+              
+              <div class="flex items-center justify-between pt-2 border-t border-white/[0.06] text-xs">
+                <span class="text-gray-500 text-[11px]">Supports Spintax <code>{Option A|Option B}</code> and Markdown.</span>
+                <div class="flex items-center gap-2">
+                  <button type="button" onclick="loadStockTemplate()" class="btn-apple-secondary text-gray-400 hover:text-white px-3 py-1.5 rounded-xl text-xs">Reset to Stock</button>
+                  <button type="button" onclick="applyEditorAndPreview()" class="btn-apple-primary text-white px-4 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5">
+                    <i data-lucide="play" class="w-3.5 h-3.5"></i> Render Changes
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===================================================================== -->
+    <!-- TAB 4: BATCH CAMPAIGN DISPATCHER                                      -->
+    <!-- ===================================================================== -->
+    <section id="tab-campaign" class="hidden space-y-6 tab-section">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- Controls Column -->
+        <div class="lg:col-span-5 card-material rounded-2xl p-6 space-y-5">
+          <div class="border-b border-white/[0.06] pb-4">
+            <h2 class="text-sm font-bold text-white flex items-center gap-2">
+              <i data-lucide="send" class="w-4 h-4 text-indigo-400"></i> Dispatch Engine
+            </h2>
+            <p class="text-xs text-gray-400 mt-1">Safely fire batches with automated delays and weekend protection.</p>
+          </div>
+
+          <!-- Weekend Guard Info -->
+          <div class="card-flat rounded-xl p-3.5 border-amber-500/20 bg-amber-500/[0.03] space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-white flex items-center gap-2">
+                <i data-lucide="calendar-off" class="w-3.5 h-3.5 text-amber-400"></i> Weekend Blocker
+              </span>
+              <span id="campaign-weekend-tag" class="text-[10px] font-mono px-2 py-0.5 rounded-full border border-emerald-500/25 bg-emerald-500/10 text-emerald-300">Checking...</span>
+            </div>
+            <p class="text-[11px] text-gray-400 leading-snug">
+              Emails arriving Saturday/Sunday get discarded by busy editors on Monday morning. Outreach automatically pauses during weekends.
+            </p>
+            <label class="flex items-center gap-2 text-xs text-gray-400 cursor-pointer pt-1">
+              <input type="checkbox" id="dispatch-override-weekend" class="rounded w-3.5 h-3.5">
+              <span>Override weekend guard (send anyway)</span>
+            </label>
+          </div>
+
+          <!-- Dispatch Configuration -->
+          <div class="space-y-4 text-xs">
+            <div>
+              <label class="block text-gray-400 mb-1 font-medium">Batch Size (Warmup Cap)</label>
+              <select id="dispatch-batch-limit" class="input-apple w-full px-3 py-2 rounded-xl">
+                <option value="3">3 Emails — Safe Warmup</option>
+                <option value="5" selected>5 Emails — Standard Batch</option>
+                <option value="10">10 Emails — Established Domain</option>
+                <option value="25">25 Emails — Maximum Daily Cap</option>
+              </select>
+            </div>
+
+            <div class="card-flat rounded-xl p-3.5 flex items-center justify-between">
+              <div>
+                <span class="text-xs font-medium text-white">Dry Run Mode</span>
+                <p class="text-[11px] text-gray-400">Simulate execution in console without sending</p>
+              </div>
+              <input type="checkbox" id="dispatch-dry-run" class="rounded w-4 h-4 cursor-pointer">
+            </div>
+
+            <div class="pt-2 space-y-2.5">
+              <button onclick="startBatchDispatch()" id="btn-dispatch-launch" class="btn-apple-primary w-full text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2">
+                <i data-lucide="play" class="w-4 h-4"></i> Start Batch Dispatch
+              </button>
+              <button onclick="openModal('modal-test-pitch')" class="btn-apple-secondary w-full text-gray-300 font-medium py-2.5 rounded-xl flex items-center justify-center gap-2">
+                <i data-lucide="flask-conical" class="w-4 h-4 text-emerald-400"></i> Send Single Test to Self
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Terminal Console Log Column -->
+        <div class="lg:col-span-7 card-flat rounded-2xl p-5 flex flex-col bg-[#07070b] border-white/[0.08] shadow-2xl">
+          <div class="flex items-center justify-between pb-3 border-b border-white/[0.06]">
+            <div class="flex items-center gap-2 font-mono text-xs text-gray-400">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
+              Live Dispatch Console
+            </div>
+            <button onclick="clearConsoleLog()" class="text-[11px] font-mono text-gray-500 hover:text-gray-300 transition">
+              Clear Logs
+            </button>
+          </div>
+
+          <div id="campaign-console-log" class="flex-1 min-h-[340px] max-h-[460px] overflow-y-auto p-3 font-mono text-xs text-gray-300 space-y-1.5 leading-relaxed">
+            <p class="text-gray-600">&gt; Outreach daemon ready. Awaiting trigger...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===================================================================== -->
+    <!-- TAB 5: INBOX SCANNER & AUTO-OPT-OUT                                   -->
+    <!-- ===================================================================== -->
+    <section id="tab-inbox" class="hidden space-y-6 tab-section">
+      <div class="card-material rounded-2xl p-6 lg:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.06] pb-5">
+          <div>
+            <h2 class="text-base font-bold text-white flex items-center gap-2.5">
+              <i data-lucide="inbox" class="w-5 h-5 text-emerald-400"></i> IMAP Reply &amp; Opt-Out Detector
+            </h2>
+            <p class="text-xs text-gray-400 mt-1">
+              Scans your inbox. Positive replies advance lead to <strong class="text-emerald-400 font-semibold">Replied</strong>. Negative feedback or unsubscribe requests immediately shift to <strong class="text-rose-400 font-semibold">Blacklisted</strong>.
+            </p>
+          </div>
+
+          <button onclick="scanInbox()" id="btn-inbox-scan-now" class="btn-apple-secondary text-white text-xs font-semibold px-4 py-2.5 rounded-xl border-emerald-500/25 bg-emerald-500/10 hover:bg-emerald-500/20 flex items-center gap-2 flex-shrink-0">
+            <i data-lucide="scan" class="w-4 h-4 text-emerald-400"></i> Scan Inbox Now
+          </button>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-mono uppercase tracking-widest text-gray-400 mb-3">Recently Detected Responses</h3>
+          <div id="inbox-responses-list" class="space-y-2.5">
+            <div class="p-8 text-center text-gray-600 text-xs card-flat rounded-xl">
+              No replies detected in this session yet. Click "Scan Inbox Now" to sync with Gmail IMAP.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===================================================================== -->
+    <!-- TAB 6: SETTINGS & VAULT                                               -->
+    <!-- ===================================================================== -->
+    <section id="tab-settings" class="hidden space-y-6 tab-section">
+      <div class="card-material rounded-2xl p-6 lg:p-8 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/[0.06] pb-5">
+          <div>
+            <h2 class="text-base font-bold text-white flex items-center gap-2.5">
+              <i data-lucide="key" class="w-5 h-5 text-indigo-400"></i> Credential Vault &amp; Engine Settings
+            </h2>
+            <p class="text-xs text-gray-400 mt-1">
+              Configure SMTP credentials, campaign settings, and Notion CRM without touching configuration files.
+            </p>
+          </div>
+
+          <button onclick="saveAllSettings()" class="btn-apple-primary text-white text-xs font-semibold px-4 py-2.5 rounded-xl flex items-center gap-2 flex-shrink-0">
+            <i data-lucide="save" class="w-4 h-4"></i> Save Settings
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Sender Profile -->
+          <div class="card-flat rounded-2xl p-5 space-y-4">
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-300 flex items-center gap-2">
+              <i data-lucide="user" class="w-4 h-4 text-indigo-400"></i> Artist / Sender Profile
+            </h3>
+            <div class="space-y-3 text-xs">
+              <div>
+                <label class="block text-gray-400 mb-1">Display Name</label>
+                <input type="text" id="setting-sender-name" class="input-apple w-full px-3 py-2 rounded-xl">
+              </div>
+              <div>
+                <label class="block text-gray-400 mb-1">Gmail Sender Address</label>
+                <input type="email" id="setting-sender-email" class="input-apple w-full px-3 py-2 rounded-xl">
+              </div>
+            </div>
+          </div>
+
+          <!-- Gmail SMTP & IMAP Credentials -->
+          <div class="card-flat rounded-2xl p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-300 flex items-center gap-2">
+                <i data-lucide="lock" class="w-4 h-4 text-emerald-400"></i> Google App Password
+              </h3>
+              <button onclick="openModal('modal-gmail-guide')" class="text-[11px] text-indigo-400 hover:underline">
+                Generate Guide
+              </button>
+            </div>
+            <div class="space-y-3 text-xs">
+              <div class="grid grid-cols-3 gap-2">
+                <div class="col-span-2">
+                  <label class="block text-gray-400 mb-1">SMTP Host</label>
+                  <input type="text" id="setting-smtp-host" value="smtp.gmail.com" class="input-apple w-full px-3 py-2 rounded-xl">
+                </div>
+                <div>
+                  <label class="block text-gray-400 mb-1">Port</label>
+                  <input type="number" id="setting-smtp-port" value="587" class="input-apple w-full px-3 py-2 rounded-xl">
+                </div>
+              </div>
+              <div>
+                <label class="block text-gray-400 mb-1">16-Character Google App Password</label>
+                <div class="relative">
+                  <input type="password" id="setting-smtp-password" placeholder="xxxx xxxx xxxx xxxx" class="input-apple w-full px-3 py-2 pr-10 rounded-xl">
+                  <button type="button" onclick="togglePasswordVisibility('setting-smtp-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition">
+                    <i data-lucide="eye" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+              <button onclick="verifySMTPConnection()" class="btn-apple-secondary w-full text-emerald-300 text-xs font-medium py-2 rounded-xl flex items-center justify-center gap-2">
+                <i data-lucide="send" class="w-3.5 h-3.5"></i> Verify SMTP (Send Diagnostic Email)
+              </button>
+            </div>
+          </div>
+
+          <!-- Notion CRM Integration -->
+          <div class="card-flat rounded-2xl p-5 space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-300 flex items-center gap-2">
+                <i data-lucide="database" class="w-4 h-4 text-purple-400"></i> Notion CRM Sync
+              </h3>
+              <label class="flex items-center gap-2 text-xs text-gray-400 cursor-pointer">
+                <span>Enable:</span>
+                <input type="checkbox" id="setting-use-notion" class="rounded w-3.5 h-3.5">
+              </label>
+            </div>
+            <div class="space-y-3 text-xs">
+              <div>
+                <label class="block text-gray-400 mb-1">Notion Integration Token</label>
+                <input type="password" id="setting-notion-key" placeholder="secret_..." class="input-apple w-full px-3 py-2 rounded-xl">
+              </div>
+              <div>
+                <label class="block text-gray-400 mb-1">Database ID</label>
+                <input type="text" id="setting-notion-db" class="input-apple w-full px-3 py-2 rounded-xl">
+              </div>
+              <button onclick="verifyNotionConnection()" class="btn-apple-secondary w-full text-purple-300 text-xs font-medium py-2 rounded-xl flex items-center justify-center gap-2">
+                <i data-lucide="plug" class="w-3.5 h-3.5"></i> Test Notion Connection
+              </button>
+            </div>
+          </div>
+
+          <!-- Campaign & Safeguard Defaults -->
+          <div class="card-flat rounded-2xl p-5 space-y-4">
+            <h3 class="text-xs font-semibold uppercase tracking-wider text-gray-300 flex items-center gap-2">
+              <i data-lucide="sliders" class="w-4 h-4 text-amber-400"></i> Campaign Defaults
+            </h3>
+            <div class="space-y-3 text-xs">
+              <div>
+                <label class="block text-gray-400 mb-1">Default Track Name</label>
+                <input type="text" id="setting-default-track" class="input-apple w-full px-3 py-2 rounded-xl">
+              </div>
+              <div>
+                <label class="block text-gray-400 mb-1">Streaming Link</label>
+                <input type="url" id="setting-default-stream" class="input-apple w-full px-3 py-2 rounded-xl">
+              </div>
+              <div>
+                <label class="block text-gray-400 mb-1">EPK / Bio Link</label>
+                <input type="url" id="setting-default-bio" class="input-apple w-full px-3 py-2 rounded-xl">
+              </div>
+              <div>
+                <label class="block text-gray-400 mb-1">Daily Send Limit</label>
+                <input type="number" id="setting-daily-limit" value="30" min="1" max="200" class="input-apple w-full px-3 py-2 rounded-xl">
+              </div>
+              <label class="flex items-center gap-2 text-xs text-gray-400 cursor-pointer pt-1">
+                <input type="checkbox" id="setting-pause-weekends" class="rounded w-3.5 h-3.5" checked>
+                <span>Automatically pause on weekends (recommended)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ===================================================================== -->
+  <!-- MODAL WINDOWS (Cupertino Frosted Sheets)                              -->
+  <!-- ===================================================================== -->
+
+  <!-- Modal 1: Test Mode (Send to Self) -->
+  <div id="modal-test-pitch" class="modal-wrapper fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/65 backdrop-blur-md">
+    <div class="modal-sheet card-material cupertino-glass rounded-3xl max-w-md w-full p-6 space-y-4 border-white/10 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/[0.06] pb-3.5">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i data-lucide="flask-conical" class="w-4 h-4 text-emerald-400"></i> Send Test Pitch to Device
+        </h3>
+        <button onclick="closeModal('modal-test-pitch')" class="p-1.5 rounded-lg text-gray-400 hover:text-white transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">
+        Verify how your rendered Spintax email displays on Outlook, Yahoo, or secondary mobile Gmail accounts before launching to real tastemakers.
+      </p>
+      <div>
+        <label class="block text-[11px] uppercase font-mono text-gray-400 mb-1.5">Destination Test Email</label>
+        <input type="email" id="test-pitch-recipient" placeholder="your-other-email@yahoo.com" class="input-apple w-full px-3.5 py-2.5 rounded-xl text-xs">
+      </div>
+      <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-white/[0.06]">
+        <button onclick="closeModal('modal-test-pitch')" class="btn-apple-secondary text-xs px-3.5 py-2 rounded-xl text-gray-400 hover:text-white">Cancel</button>
+        <button onclick="executeSendTestPitch()" id="btn-modal-test-dispatch" class="btn-apple-primary text-white text-xs font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5">
+          <i data-lucide="send" class="w-3.5 h-3.5"></i> Dispatch Test
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Add Curator -->
+  <div id="modal-add-curator" class="modal-wrapper fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/65 backdrop-blur-md">
+    <div class="modal-sheet card-material cupertino-glass rounded-3xl max-w-md w-full p-6 space-y-4 border-white/10 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/[0.06] pb-3.5">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i data-lucide="user-plus" class="w-4 h-4 text-indigo-400"></i> Add New Curator
+        </h3>
+        <button onclick="closeModal('modal-add-curator')" class="p-1.5 rounded-lg text-gray-400 hover:text-white transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block text-gray-400 mb-1">Full Name *</label>
+          <input type="text" id="new-lead-name" placeholder="Amit Sharma" class="input-apple w-full px-3 py-2 rounded-xl">
+        </div>
+        <div>
+          <label class="block text-gray-400 mb-1">Email Address *</label>
+          <input type="email" id="new-lead-email" placeholder="amit@wildcity.test" class="input-apple w-full px-3 py-2 rounded-xl">
+        </div>
+        <div>
+          <label class="block text-gray-400 mb-1">Publication / Playlist</label>
+          <input type="text" id="new-lead-publication" placeholder="Wild City India" class="input-apple w-full px-3 py-2 rounded-xl">
+        </div>
+        <div>
+          <label class="block text-gray-400 mb-1">Persona</label>
+          <select id="new-lead-persona" class="input-apple w-full px-3 py-2 rounded-xl">
+            <option value="Journalist">Journalist / Blogger</option>
+            <option value="Playlist Curator">Playlist Curator</option>
+            <option value="A&R">A&R / Label Rep</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-gray-400 mb-1">Personalization Hook (Recent Work / Focus)</label>
+          <input type="text" id="new-lead-work" placeholder="coverage of underground Indian electronic beats" class="input-apple w-full px-3 py-2 rounded-xl">
+        </div>
+      </div>
+      <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-white/[0.06]">
+        <button onclick="closeModal('modal-add-curator')" class="btn-apple-secondary text-xs px-3.5 py-2 rounded-xl text-gray-400 hover:text-white">Cancel</button>
+        <button onclick="submitNewLead()" class="btn-apple-primary text-white text-xs font-semibold px-4 py-2 rounded-xl">
+          Add to CRM
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Import CSV -->
+  <div id="modal-import-csv" class="modal-wrapper fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/65 backdrop-blur-md">
+    <div class="modal-sheet card-material cupertino-glass rounded-3xl max-w-lg w-full p-6 space-y-4 border-white/10 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/[0.06] pb-3.5">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i data-lucide="upload-cloud" class="w-4 h-4 text-indigo-400"></i> Import Curators from CSV
+        </h3>
+        <button onclick="closeModal('modal-import-csv')" class="p-1.5 rounded-lg text-gray-400 hover:text-white transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <p class="text-xs text-gray-400 leading-relaxed">
+        Paste CSV or spreadsheet rows copied directly from Google Sheets, Excel, or Apollo. Supports <strong>tabs, commas, or semicolons</strong>. Header casing does not matter (e.g. <code class="text-indigo-300 font-mono">name, email, publication, persona, recent work</code>) or paste raw rows.
+      </p>
+      <textarea id="csv-import-textarea" rows="8" placeholder="name,email,publication,persona,recent work&#10;Karan,karan@blog.test,Indie Sound,Journalist,downtempo beats" class="input-apple w-full p-3.5 rounded-xl text-xs font-mono"></textarea>
+      <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-white/[0.06]">
+        <button onclick="closeModal('modal-import-csv')" class="btn-apple-secondary text-xs px-3.5 py-2 rounded-xl text-gray-400 hover:text-white">Cancel</button>
+        <button onclick="submitCSVImport()" class="btn-apple-primary text-white text-xs font-semibold px-4 py-2 rounded-xl">
+          Import Contacts
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Gmail App Password Guide -->
+  <div id="modal-gmail-guide" class="modal-wrapper fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/65 backdrop-blur-md">
+    <div class="modal-sheet card-material cupertino-glass rounded-3xl max-w-md w-full p-6 space-y-4 border-white/10 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-white/[0.06] pb-3.5">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i data-lucide="info" class="w-4 h-4 text-amber-400"></i> Gmail App Password Guide
+        </h3>
+        <button onclick="closeModal('modal-gmail-guide')" class="p-1.5 rounded-lg text-gray-400 hover:text-white transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <ol class="list-decimal list-inside space-y-2 text-xs text-gray-300 leading-relaxed pl-1">
+        <li>Open your Google Account at <a href="https://myaccount.google.com/security" target="_blank" class="text-indigo-400 underline">myaccount.google.com/security</a>.</li>
+        <li>Ensure <strong>2-Step Verification</strong> is enabled.</li>
+        <li>Search for <strong>"App passwords"</strong> in the top search box.</li>
+        <li>Create an app named <code class="text-indigo-300 font-mono">PR Bot</code> and click Generate.</li>
+        <li>Copy the 16-letter password and paste it into the Vault above.</li>
+      </ol>
+      <div class="flex justify-end pt-3 border-t border-white/[0.06]">
+        <button onclick="closeModal('modal-gmail-guide')" class="btn-apple-primary text-white text-xs px-4 py-2 rounded-xl font-semibold">Understood</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===================================================================== -->
+  <!-- FRONTEND LOGIC & STATE CONTROLLER                                     -->
+  <!-- ===================================================================== -->
+  <script>
+    'use strict';
+
+    // Application state
+    let state = {
+      leads: [],
+      config: {},
+      currentTab: 'dashboard',
+      crmView: 'kanban',
+    };
+
+    // Navigation Tabs Definition
+    const TABS = [
+      { id: 'dashboard', label: 'Dashboard', icon: 'layout-dashboard' },
+      { id: 'crm', label: 'CRM Pipeline', icon: 'users' },
+      { id: 'composer', label: 'Pitch Composer', icon: 'mail' },
+      { id: 'campaign', label: 'Dispatcher', icon: 'send' },
+      { id: 'inbox', label: 'Inbox Scanner', icon: 'inbox' },
+      { id: 'settings', label: 'Settings', icon: 'settings' }
+    ];
+
+    // Utility: Debounce wrapper
+    function debounce(fn, delay) {
+      let timer;
+      return function(...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), delay);
+      };
+    }
+
+    const debouncedSearch = debounce(filterCRM, 280);
+    const debouncedPreview = debounce(renderPitchPreview, 400);
+
+    // Helpers: Element lookup & safe escaping
+    const $ = (id) => document.getElementById(id);
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    // Initialize Application on DOM Ready
+    document.addEventListener('DOMContentLoaded', async () => {
+      lucide.createIcons();
+      initMobileNav();
+      setupModalBackdrops();
+
+      // Load remote settings and leads concurrently
+      await Promise.all([loadConfiguration(), loadCRMLeads()]);
+      renderPitchPreview();
+    });
+
+    // Setup backdrop dismiss for all modals
+    function setupModalBackdrops() {
+      document.querySelectorAll('.modal-wrapper').forEach(wrapper => {
+        wrapper.addEventListener('click', (e) => {
+          if (e.target === wrapper) {
+            wrapper.classList.add('hidden');
+          }
+        });
+      });
+    }
+
+    // Modal helpers
+    function openModal(id) {
+      const modal = $(id);
+      if (modal) {
+        modal.classList.remove('hidden');
+        lucide.createIcons({ nodes: [modal] });
+      }
+    }
+
+    function closeModal(id) {
+      const modal = $(id);
+      if (modal) modal.classList.add('hidden');
+    }
+
+    // Mobile drawer toggle
+    function toggleMobileMenu() {
+      const drawer = $('mobile-drawer');
+      const overlay = $('mobile-overlay');
+      drawer.classList.toggle('open');
+      overlay.classList.toggle('hidden');
+    }
+
+    function initMobileNav() {
+      const container = $('mobile-nav-items');
+      if (!container) return;
+      container.innerHTML = TABS.map(t => `
+        <button onclick="switchTab('${t.id}'); toggleMobileMenu()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-300 hover:text-white hover:bg-white/5 transition text-left">
+          <i data-lucide="${t.icon}" class="w-4 h-4 text-indigo-400"></i>
+          <span>${t.label}</span>
+        </button>
+      `).join('');
+      lucide.createIcons({ nodes: [container] });
+    }
+
+    // Tab Switching Controller
+    function switchTab(targetTab) {
+      state.currentTab = targetTab;
+      TABS.forEach(t => {
+        const sec = $(`tab-${t.id}`);
+        const btn = $(`nav-${t.id}`);
+        if (sec) sec.classList.add('hidden');
+        if (btn) btn.classList.remove('active');
+      });
+
+      const activeSec = $(`tab-${targetTab}`);
+      const activeBtn = $(`nav-${targetTab}`);
+      if (activeSec) {
+        activeSec.classList.remove('hidden');
+        lucide.createIcons({ nodes: [activeSec] });
+      }
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    // Notification Toaster (DOM textContent based, XSS-proof)
+    function notify(message, type = 'info') {
+      const shelf = $('toast-shelf');
+      const toast = document.createElement('div');
+      
+      const theme = {
+        success: { bg: 'rgba(5, 38, 20, 0.95)', border: 'rgba(16, 185, 129, 0.4)', color: '#6ee7b7', dot: '#10b981' },
+        error:   { bg: 'rgba(38, 8, 12, 0.95)', border: 'rgba(244, 63, 94, 0.4)', color: '#fca5a5', dot: '#f43f5e' },
+        warning: { bg: 'rgba(38, 24, 6, 0.95)', border: 'rgba(245, 158, 11, 0.4)', color: '#fcd34d', dot: '#f59e0b' },
+        info:    { bg: 'rgba(14, 15, 25, 0.95)', border: 'rgba(255, 255, 255, 0.12)', color: '#e2e8f0', dot: '#818cf8' },
+      }[type] || theme.info;
+
+      toast.style.cssText = `background: ${theme.bg}; border: 1px solid ${theme.border}; color: ${theme.color}; pointer-events: auto;`;
+      toast.className = 'flex items-center gap-3 px-4 py-3 rounded-2xl shadow-2xl text-xs font-medium toast-enter';
+      
+      const dot = document.createElement('span');
+      dot.style.cssText = `width: 6px; height: 6px; border-radius: 50%; background: ${theme.dot}; flex-shrink: 0;`;
+      toast.appendChild(dot);
+
+      const textSpan = document.createElement('span');
+      textSpan.textContent = message;
+      toast.appendChild(textSpan);
+
+      shelf.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.remove('toast-enter');
+        toast.classList.add('toast-leave');
+        setTimeout(() => toast.remove(), 220);
+      }, 4500);
+    }
+
+    // Load & Hydrate Configuration
+    async function loadConfiguration() {
+      try {
+        const res = await fetch('/api/config');
+        if (!res.ok) return;
+        const cfg = await res.json();
+        state.config = cfg;
+
+        // Populate Settings UI
+        $('setting-sender-name').value = cfg.sender_name || 'Kxrn Gupta';
+        $('setting-sender-email').value = cfg.sender_email || '';
+        $('setting-smtp-host').value = cfg.smtp_host || 'smtp.gmail.com';
+        $('setting-smtp-port').value = cfg.smtp_port || 587;
+        $('setting-smtp-password').value = cfg.smtp_password || '';
+        $('setting-notion-key').value = cfg.notion_api_key || '';
+        $('setting-notion-db').value = cfg.notion_database_id || '';
+        $('setting-default-track').value = cfg.default_track_name || 'Midnight Reverie';
+        $('setting-default-stream').value = cfg.default_stream_link || '';
+        $('setting-default-bio').value = cfg.default_bio_link || '';
+        $('setting-daily-limit').value = cfg.daily_send_limit || 30;
+        $('setting-use-notion').checked = !!cfg.use_notion;
+        $('setting-pause-weekends').checked = cfg.pause_on_weekends !== false;
+
+        // Sync Dash track title
+        if ($('dash-track-name')) {
+          $('dash-track-name').textContent = `"${cfg.default_track_name || 'Midnight Reverie'}"`;
+        }
+
+        // Pre-fill composer track
+        if (cfg.default_track_name) $('comp-track-name').value = cfg.default_track_name;
+        if (cfg.default_stream_link) $('comp-stream-link').value = cfg.default_stream_link;
+        if (cfg.default_bio_link) $('comp-bio-link').value = cfg.default_bio_link;
+
+        // Pre-fill test pitch modal recipient
+        if ($('test-pitch-recipient') && !$('test-pitch-recipient').value) {
+          $('test-pitch-recipient').value = cfg.sender_email || '';
+        }
+      } catch (err) {
+        console.error('Config fetch error:', err);
+      }
+    }
+
+    // Save All Settings to API
+    async function saveAllSettings() {
+      const payload = {
+        sender_name: $('setting-sender-name').value.trim(),
+        sender_email: $('setting-sender-email').value.trim(),
+        smtp_user: $('setting-sender-email').value.trim(),
+        smtp_host: $('setting-smtp-host').value.trim(),
+        smtp_port: parseInt($('setting-smtp-port').value) || 587,
+        smtp_password: $('setting-smtp-password').value.trim(),
+        use_notion: $('setting-use-notion').checked,
+        notion_api_key: $('setting-notion-key').value.trim(),
+        notion_database_id: $('setting-notion-db').value.trim(),
+        default_track_name: $('setting-default-track').value.trim(),
+        default_stream_link: $('setting-default-stream').value.trim(),
+        default_bio_link: $('setting-default-bio').value.trim(),
+        daily_send_limit: parseInt($('setting-daily-limit').value) || 30,
+        pause_on_weekends: $('setting-pause-weekends').checked,
+      };
+
+      try {
+        const res = await fetch('/api/config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (res.ok) {
+          notify('Vault settings updated and active!', 'success');
+          await loadConfiguration();
+          await loadCRMLeads();
+        } else {
+          notify('Failed to update settings.', 'error');
+        }
+      } catch (err) {
+        notify('Network error saving configuration.', 'error');
+      }
+    }
+
+    // Load Leads from CRM
+    async function loadCRMLeads() {
+      try {
+        const res = await fetch('/api/leads');
+        if (!res.ok) return;
+        const data = await res.json();
+        state.leads = data.leads || [];
+
+        updatePipelineMetrics(data.summary || {});
+        renderCRM(state.leads);
+        populateComposerSelect(state.leads);
+        renderDashRecentTable(state.leads);
+
+        // Update weekend indicators
+        updateWeekendStatusUI(data.is_weekend);
+      } catch (err) {
+        console.error('Leads fetch error:', err);
+      }
+    }
+
+    // Update Header and Dashboard Metrics
+    function updatePipelineMetrics(summary) {
+      const totalCount = summary['Total Leads'] || state.leads.length;
+      const toContactCount = summary['To Contact'] || 0;
+      const sentCount = summary['Sent'] || 0;
+      const openedCount = summary['Opened'] || 0;
+      const repliedCount = summary['Replied'] || 0;
+      const followupCount = summary['Follow-up Sent'] || 0;
+      const blacklistedCount = summary['Blacklisted'] || state.leads.filter(l => l.status === 'Blacklisted').length;
+      const todaySent = summary['Today Sent'] || 0;
+      const dailyLimit = summary['Daily Limit'] || 30;
+
+      $('metric-total').textContent = totalCount;
+      $('metric-tocontact').textContent = toContactCount;
+      $('metric-sent').textContent = sentCount;
+      $('metric-opened').textContent = openedCount;
+      $('metric-replied').textContent = repliedCount;
+      $('metric-followup').textContent = followupCount;
+      $('metric-blacklisted').textContent = blacklistedCount;
+
+      // Quotas
+      const quotaStr = `${todaySent} / ${dailyLimit}`;
+      $('header-quota-text').textContent = quotaStr;
+      $('dash-quota-counter').textContent = quotaStr;
+
+      const pct = Math.min(100, Math.round((todaySent / dailyLimit) * 100));
+      $('dash-quota-progress').style.width = `${pct}%`;
+    }
+
+    // Update Weekend Guard Badges
+    function updateWeekendStatusUI(isWeekend) {
+      const pill = $('weekend-pill');
+      const pillText = $('weekend-pill-text');
+      const campaignTag = $('campaign-weekend-tag');
+      const dashStatus = $('dash-weekend-status');
+
+      if (isWeekend) {
+        pill.className = 'flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono border border-amber-500/30 bg-amber-500/10 text-amber-300';
+        pillText.textContent = 'Weekend Blocked';
+        if (campaignTag) {
+          campaignTag.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-300';
+          campaignTag.textContent = 'Active (Weekend Paused)';
+        }
+        if (dashStatus) dashStatus.textContent = 'Weekend Paused';
+      } else {
+        pill.className = 'flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-mono border border-emerald-500/20 bg-emerald-500/10 text-emerald-300';
+        pillText.textContent = 'Weekday Active';
+        if (campaignTag) {
+          campaignTag.className = 'text-[10px] font-mono px-2 py-0.5 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-300';
+          campaignTag.textContent = 'Weekday Active';
+        }
+        if (dashStatus) dashStatus.textContent = 'Auto-Enforced';
+      }
+    }
+
+    // High Performance Kanban & Table Renderer (DOM array accumulation)
+    function renderCRM(leads) {
+      const colIds = {
+        'To Contact': 'kanban-col-tocontact',
+        'Sent': 'kanban-col-sent',
+        'Opened': 'kanban-col-opened',
+        'Replied': 'kanban-col-replied',
+        'Follow-up Sent': 'kanban-col-followup',
+        'Blacklisted': 'kanban-col-blacklisted'
+      };
+
+      const countIds = {
+        'To Contact': 'kcount-tocontact',
+        'Sent': 'kcount-sent',
+        'Opened': 'kcount-opened',
+        'Replied': 'kcount-replied',
+        'Follow-up Sent': 'kcount-followup',
+        'Blacklisted': 'kcount-blacklisted'
+      };
+
+      const columnsHtml = {};
+      const columnCounts = {};
+      Object.keys(colIds).forEach(k => {
+        columnsHtml[k] = [];
+        columnCounts[k] = 0;
+      });
+
+      leads.forEach(lead => {
+        const st = lead.status || 'To Contact';
+        if (columnsHtml[st] !== undefined) {
+          columnCounts[st]++;
+          columnsHtml[st].push(buildKanbanCard(lead));
+        }
+      });
+
+      // Single DOM replacement per column (no innerHTML += in loop)
+      Object.entries(colIds).forEach(([st, colId]) => {
+        const el = $(colId);
+        if (el) {
+          el.innerHTML = columnsHtml[st].join('') || `
+            <div class="flex flex-col items-center justify-center h-24 text-gray-600 gap-1.5">
+              <i data-lucide="inbox" class="w-4 h-4 opacity-40"></i>
+              <span class="text-[10px] font-mono">No leads</span>
+            </div>
+          `;
+        }
+      });
+
+      // Update column counter badges
+      Object.entries(countIds).forEach(([st, countId]) => {
+        const badge = $(countId);
+        if (badge) badge.textContent = columnCounts[st] || 0;
+      });
+
+      // Update table view rows
+      renderCRMTable(leads);
+
+      // Scoped Lucide icon creation
+      const kb = $('crm-kanban-view');
+      if (kb && state.currentTab === 'crm') {
+        lucide.createIcons({ nodes: [kb] });
+      }
+    }
+
+    // Build Single Kanban Card
+    function buildKanbanCard(l) {
+      const isBlacklisted = l.status === 'Blacklisted';
+      const openBadge = l.open_count > 0 ? `
+        <span class="flex items-center gap-1 text-[10px] font-mono text-purple-400">
+          <i data-lucide="eye" class="w-3 h-3"></i> ${l.open_count}
+        </span>
+      ` : '';
+
+      return `
+        <div class="card-material rounded-xl p-3 space-y-2 group">
+          <div class="flex items-start justify-between gap-1.5">
+            <div class="min-w-0 flex-1">
+              <h5 class="font-semibold text-xs text-white truncate">${escapeHtml(l.name)}</h5>
+              <p class="text-[11px] text-gray-400 truncate">${escapeHtml(l.publication || 'Independent')}</p>
+            </div>
+            <button onclick="deleteCurator('${escapeHtml(l.id)}')" class="opacity-0 group-hover:opacity-100 p-1 rounded-lg hover:bg-rose-500/10 text-gray-500 hover:text-rose-400 transition flex-shrink-0" title="Delete lead">
+              <i data-lucide="trash-2" class="w-3 h-3"></i>
+            </button>
+          </div>
+
+          ${l.recent_work ? `<p class="text-[10px] text-gray-400 italic line-clamp-2">"${escapeHtml(l.recent_work)}"</p>` : ''}
+
+          <div class="flex items-center justify-between pt-1.5 border-t border-white/[0.05] text-[10px]">
+            <span class="text-gray-400">${escapeHtml(l.persona || 'Journalist')}</span>
+            <div class="flex items-center gap-2">
+              ${openBadge}
+              ${!isBlacklisted ? `
+                <button onclick="previewCuratorPitch('${escapeHtml(l.id)}')" class="text-indigo-400 hover:text-indigo-300 font-medium transition">
+                  Preview
+                </button>
+              ` : `
+                <span class="text-rose-400 font-medium">Opted Out</span>
+              `}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Build CRM Table
+    function renderCRMTable(leads) {
+      const tbody = $('crm-table-tbody');
+      if (!tbody) return;
+
+      if (!leads.length) {
+        tbody.innerHTML = `<tr><td colspan="8" class="py-12 text-center text-gray-600 text-xs">No curators match the filter criteria.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = leads.map(l => `
+        <tr class="hover:bg-white/[0.02] transition text-xs border-b border-white/[0.04]">
+          <td class="px-5 py-3.5 font-medium text-white">${escapeHtml(l.name)}</td>
+          <td class="px-5 py-3.5 font-mono text-[11px] text-gray-400">${escapeHtml(l.email)}</td>
+          <td class="px-5 py-3.5 text-gray-300">${escapeHtml(l.publication || '')}</td>
+          <td class="px-5 py-3.5 text-gray-400">${escapeHtml(l.persona || '')}</td>
+          <td class="px-5 py-3.5 text-gray-400 max-w-[200px] truncate">${escapeHtml(l.recent_work || '—')}</td>
+          <td class="px-5 py-3.5">${buildStatusBadge(l.status)}</td>
+          <td class="px-5 py-3.5 font-mono text-gray-400 text-center">${l.open_count || 0}</td>
+          <td class="px-5 py-3.5 text-right space-x-3">
+            <button onclick="previewCuratorPitch('${escapeHtml(l.id)}')" class="text-indigo-400 hover:text-indigo-300 font-medium transition">Preview</button>
+            <button onclick="deleteCurator('${escapeHtml(l.id)}')" class="text-rose-400 hover:text-rose-300 font-medium transition">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Dashboard Recent Table
+    function renderDashRecentTable(leads) {
+      const tbody = $('dash-recent-tbody');
+      if (!tbody) return;
+
+      if (!leads.length) {
+        tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-gray-600 text-xs">No curators yet. Click "Import CSV" to start.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = leads.slice(0, 6).map(l => `
+        <tr class="hover:bg-white/[0.02] transition text-xs">
+          <td class="py-3 font-medium text-white">${escapeHtml(l.name)}</td>
+          <td class="py-3 text-gray-400">${escapeHtml(l.publication || 'Independent')}</td>
+          <td class="py-3 text-gray-400">${escapeHtml(l.persona || 'Journalist')}</td>
+          <td class="py-3">${buildStatusBadge(l.status)}</td>
+          <td class="py-3 text-right">
+            <button onclick="previewCuratorPitch('${escapeHtml(l.id)}')" class="text-indigo-400 hover:text-indigo-300 transition">Preview</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // Status Pill Tag Builder
+    function buildStatusBadge(status) {
+      const config = {
+        'To Contact': { border: 'rgba(245, 158, 11, 0.3)', bg: 'rgba(245, 158, 11, 0.1)', text: '#fcd34d', label: 'To Contact' },
+        'Sent': { border: 'rgba(99, 102, 241, 0.3)', bg: 'rgba(99, 102, 241, 0.1)', text: '#a5b4fc', label: 'Sent' },
+        'Opened': { border: 'rgba(168, 85, 247, 0.3)', bg: 'rgba(168, 85, 247, 0.1)', text: '#d8b4fe', label: 'Opened' },
+        'Replied': { border: 'rgba(16, 185, 129, 0.3)', bg: 'rgba(16, 185, 129, 0.1)', text: '#6ee7b7', label: 'Replied' },
+        'Follow-up Sent': { border: 'rgba(59, 130, 246, 0.3)', bg: 'rgba(59, 130, 246, 0.1)', text: '#93c5fd', label: 'Follow-up' },
+        'Blacklisted': { border: 'rgba(244, 63, 94, 0.3)', bg: 'rgba(244, 63, 94, 0.1)', text: '#fca5a5', label: 'Blacklisted' }
+      }[status] || { border: 'rgba(255, 255, 255, 0.1)', bg: 'rgba(255, 255, 255, 0.05)', text: '#cbd5e1', label: status };
+
+      return `
+        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-medium font-mono" style="background: ${config.bg}; border: 1px solid ${config.border}; color: ${config.text}">
+          ${config.label}
+        </span>
+      `;
+    }
+
+    // Filter CRM Leads
+    function filterCRM() {
+      const q = $('crm-search-input').value.toLowerCase().trim();
+      const persona = $('crm-filter-persona').value;
+      const status = $('crm-filter-status').value;
+
+      const filtered = state.leads.filter(l => {
+        const matchesQ = l.name.toLowerCase().includes(q) ||
+                         (l.email && l.email.toLowerCase().includes(q)) ||
+                         (l.publication && l.publication.toLowerCase().includes(q));
+        const matchesPersona = persona === 'all' || l.persona === persona;
+        const matchesStatus = status === 'all' || l.status === status;
+        return matchesQ && matchesPersona && matchesStatus;
+      });
+
+      renderCRM(filtered);
+    }
+
+    // Switch between Kanban & Table Views
+    function setCRMView(viewMode) {
+      state.crmView = viewMode;
+      const kanban = $('crm-kanban-view');
+      const table = $('crm-table-view');
+      const btnK = $('crm-view-kanban-btn');
+      const btnT = $('crm-view-table-btn');
+
+      if (viewMode === 'kanban') {
+        kanban.classList.remove('hidden');
+        table.classList.add('hidden');
+        btnK.classList.add('active');
+        btnT.classList.remove('active');
+      } else {
+        kanban.classList.add('hidden');
+        table.classList.remove('hidden');
+        btnT.classList.add('active');
+        btnK.classList.remove('active');
+        lucide.createIcons({ nodes: [table] });
+      }
+    }
+
+    // Pitch Composer Population & Preview
+    function populateComposerSelect(leads) {
+      const sel = $('comp-lead-select');
+      if (!sel) return;
+      const eligible = leads.filter(l => l.status !== 'Blacklisted');
+      sel.innerHTML = [
+        '<option value="">Sample Lead (Amit Sharma — Wild City)</option>',
+        ...eligible.map(l => `<option value="${escapeHtml(l.id)}">${escapeHtml(l.name)} — ${escapeHtml(l.publication || 'Independent')}</option>`)
+      ].join('');
+    }
+
+    function previewCuratorPitch(leadId) {
+      switchTab('composer');
+      const sel = $('comp-lead-select');
+      if (sel) sel.value = leadId;
+      renderPitchPreview();
+    }
+
+    let composerMode = 'preview';
+    let customSubjectEdited = false;
+    let rawTemplateCache = '';
+
+    function setComposerMode(mode) {
+      composerMode = mode;
+      const previewView = $('composer-preview-view');
+      const editorView = $('composer-editor-view');
+      const btnPreview = $('btn-mode-preview');
+      const btnEditor = $('btn-mode-editor');
+      const btnSave = $('btn-save-tpl');
+
+      if (mode === 'preview') {
+        previewView.classList.remove('hidden');
+        editorView.classList.add('hidden');
+        btnPreview.classList.add('active');
+        btnEditor.classList.remove('active');
+        if (btnSave) btnSave.classList.add('hidden');
+      } else {
+        previewView.classList.add('hidden');
+        editorView.classList.remove('hidden');
+        btnEditor.classList.add('active');
+        btnPreview.classList.remove('active');
+        if (btnSave) btnSave.classList.remove('hidden');
+        loadTemplateIntoEditor();
+      }
+      lucide.createIcons();
+    }
+
+    async function loadTemplateIntoEditor() {
+      const tplType = $('comp-template-type').value || 'blog';
+      const editor = $('comp-template-editor');
+      if (!editor.value.trim() || editor.dataset.loadedType !== tplType) {
+        try {
+          const res = await fetch(`/api/templates/${tplType}`);
+          if (res.ok) {
+            const data = await res.json();
+            editor.value = data.content || '';
+            editor.dataset.loadedType = tplType;
+            rawTemplateCache = data.content || '';
+          }
+        } catch (e) {
+          console.error('Error fetching template:', e);
+        }
+      }
+    }
+
+    function insertToken(token) {
+      const editor = $('comp-template-editor');
+      if (!editor) return;
+      const start = editor.selectionStart;
+      const end = editor.selectionEnd;
+      const text = editor.value;
+      editor.value = text.substring(0, start) + token + text.substring(end);
+      editor.focus();
+      editor.selectionStart = editor.selectionEnd = start + token.length;
+    }
+
+    async function saveCurrentTemplate() {
+      const tplType = $('comp-template-type').value || 'blog';
+      const content = $('comp-template-editor').value;
+      if (!content.trim()) {
+        notify('Template content cannot be empty.', 'error');
+        return;
+      }
+      try {
+        const res = await fetch(`/api/templates/${tplType}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content })
+        });
+        if (res.ok) {
+          notify(`Template '${tplType}' saved permanently!`, 'success');
+          rawTemplateCache = content;
+          renderPitchPreview();
+        } else {
+          notify('Failed to save template changes.', 'error');
+        }
+      } catch (err) {
+        notify('Network error saving template.', 'error');
+      }
+    }
+
+    async function loadStockTemplate() {
+      const tplType = $('comp-template-type').value || 'blog';
+      try {
+        const res = await fetch(`/api/templates/${tplType}`);
+        if (res.ok) {
+          const data = await res.json();
+          $('comp-template-editor').value = data.content || '';
+          $('comp-template-editor').dataset.loadedType = tplType;
+          customSubjectEdited = false;
+          notify('Reset editor to stored template.', 'info');
+          renderPitchPreview();
+        }
+      } catch (err) {
+        notify('Failed to reload template.', 'error');
+      }
+    }
+
+    function applyEditorAndPreview() {
+      setComposerMode('preview');
+      renderPitchPreview();
+    }
+
+    function onCustomSubjectChange() {
+      customSubjectEdited = true;
+    }
+
+    function onCustomBodyChange() {
+      // Body edited in template editor
+    }
+
+    async function renderPitchPreview() {
+      const editorVal = $('comp-template-editor')?.value;
+      const subjectInput = $('comp-subject-input');
+      const customSubj = (customSubjectEdited && subjectInput) ? subjectInput.value : null;
+
+      try {
+        const res = await fetch('/api/preview', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            lead_id: $('comp-lead-select').value || null,
+            template_type: $('comp-template-type').value || 'blog',
+            track_name: $('comp-track-name').value.trim() || null,
+            stream_link: $('comp-stream-link').value.trim() || null,
+            bio_link: $('comp-bio-link').value.trim() || null,
+            custom_template: (editorVal && editorVal.trim()) ? editorVal : null,
+            custom_subject: customSubj,
+          })
+        });
+
+        if (!res.ok) return;
+        const data = await res.json();
+
+        $('preview-meta-from').textContent = `${state.config.sender_name || 'Kxrn Gupta'} <${state.config.sender_email || 'chitesh.gupta@gmail.com'}>`;
+        $('preview-meta-to').textContent = `${data.lead?.name || ''} <${data.lead?.email || ''}>`;
+        
+        if (subjectInput && !customSubjectEdited) {
+          subjectInput.value = data.subject || '';
+        }
+        $('composer-preview-view').innerHTML = data.html_body || '';
+
+        // Pre-fill editor if not filled yet
+        const editor = $('comp-template-editor');
+        if (editor && !editor.value.trim() && data.raw_template) {
+          editor.value = data.raw_template;
+          editor.dataset.loadedType = data.template_type;
+        }
+      } catch (err) {
+        console.error('Preview error:', err);
+      }
+    }
+
+    // Batch Campaign Dispatcher
+    async function startBatchDispatch() {
+      const limit = parseInt($('dispatch-batch-limit').value) || 5;
+      const dryRun = $('dispatch-dry-run').checked;
+      const ignoreWeekend = $('dispatch-override-weekend').checked;
+      const btn = $('btn-dispatch-launch');
+
+      appendConsoleLog(`[START] Preparing dispatch: limit=${limit}, dry_run=${dryRun}, override_weekend=${ignoreWeekend}`, 'info');
+
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Dispatching Batch...';
+        lucide.createIcons({ nodes: [btn] });
+      }
+
+      const editorVal = $('comp-template-editor')?.value;
+
+      try {
+        const res = await fetch('/api/campaign/dispatch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            limit: limit,
+            dry_run: dryRun,
+            ignore_weekend: ignoreWeekend,
+            custom_template: (editorVal && editorVal.trim()) ? editorVal : null
+          })
+        });
+
+        const data = await res.json();
+        if (res.ok && data.status === 'success') {
+          appendConsoleLog(`[OK] Successfully dispatched ${data.sent_count} emails. Today total: ${data.today_sent}/${data.daily_limit}`, 'success');
+          notify(`Dispatched ${data.sent_count} pitches!`, 'success');
+          await loadCRMLeads();
+        } else if (data.status === 'blocked') {
+          appendConsoleLog(`[BLOCKED] Safeguard paused dispatch: ${data.message}`, 'warning');
+          notify(data.message, 'warning');
+          if (data.is_weekend) updateWeekendStatusUI(true);
+        } else {
+          appendConsoleLog(`[FAIL] ${data.message || data.detail || 'Dispatch rejected'}`, 'error');
+          notify(data.message || 'Dispatch failed', 'error');
+        }
+      } catch (err) {
+        appendConsoleLog(`[FAIL] Network communication error: ${err.message}`, 'error');
+        notify('Network error triggering campaign', 'error');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<i data-lucide="play" class="w-4 h-4"></i> Start Batch Dispatch';
+          lucide.createIcons({ nodes: [btn] });
+        }
+      }
+    }
+
+    // Inbox IMAP Scanner
+    async function scanInbox() {
+      const btn = $('btn-inbox-scan-now');
+      if (btn) btn.disabled = true;
+      notify('Connecting to Gmail IMAP server...', 'info');
+
+      try {
+        const res = await fetch('/api/inbox/scan', { method: 'POST' });
+        const data = await res.json();
+        if (res.ok) {
+          notify(`Inbox scanned! ${data.new_replies} new responses found.`, 'success');
+          await loadCRMLeads();
+          renderInboxResponses(data.replies || [], data.new_replies || 0);
+        } else {
+          notify('Inbox scan failed. Check IMAP credentials.', 'error');
+        }
+      } catch (err) {
+        notify('Connection error scanning inbox.', 'error');
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    }
+
+    function renderInboxResponses(replies, count) {
+      const container = $('inbox-responses-list');
+      if (!container) return;
+
+      if (!replies.length && count === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center text-gray-500 text-xs card-flat rounded-xl">
+            No new replies or opt-outs found in the unread inbox.
+          </div>
+        `;
+        return;
+      }
+
+      if (replies.length) {
+        container.innerHTML = replies.map(r => {
+          const isBlacklist = r.action === 'blacklisted';
+          return `
+            <div class="card-flat rounded-xl p-4 flex items-start justify-between gap-3 border-white/[0.06]">
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${isBlacklist ? 'bg-rose-500/15 text-rose-400' : 'bg-emerald-500/15 text-emerald-400'}">
+                  <i data-lucide="${isBlacklist ? 'user-x' : 'message-circle'}" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs font-semibold text-white">${escapeHtml(r.lead_name || r.from_email || 'Unknown Curator')}</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono ${isBlacklist ? 'bg-rose-500/15 text-rose-300' : 'bg-emerald-500/15 text-emerald-300'}">
+                      ${isBlacklist ? 'Auto-Blacklisted' : 'Replied'}
+                    </span>
+                  </div>
+                  <p class="text-[11px] text-gray-400 mt-0.5">${escapeHtml(r.subject || 'Re: Music Pitch')}</p>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+        lucide.createIcons({ nodes: [container] });
+      } else {
+        container.innerHTML = `
+          <div class="p-4 rounded-xl text-xs text-emerald-300 bg-emerald-500/10 border border-emerald-500/20">
+            Detected and updated ${count} replies in the CRM.
+          </div>
+        `;
+      }
+    }
+
+    // Diagnostic SMTP Verification
+    async function verifySMTPConnection() {
+      const email = $('setting-sender-email').value.trim();
+      const name = $('setting-sender-name').value.trim();
+      const host = $('setting-smtp-host').value.trim();
+      const port = parseInt($('setting-smtp-port').value) || 587;
+      const pw = $('setting-smtp-password').value.trim();
+
+      if (!email) {
+        notify('Enter your Gmail address first.', 'error');
+        return;
+      }
+      notify(`Verifying SMTP & dispatching diagnostic test to ${email}...`, 'info');
+
+      try {
+        const res = await fetch('/api/test-credentials', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            recipient_email: email,
+            sender_name: name,
+            sender_email: email,
+            smtp_host: host,
+            smtp_port: port,
+            smtp_password: pw
+          })
+        });
+        const data = await res.json();
+        if (res.ok && data.status === 'success') {
+          notify(`Diagnostic email delivered to ${email}! Check inbox/spam.`, 'success');
+          await loadConfiguration();
+        } else {
+          notify(`SMTP Error: ${data.message || 'Verification failed'}`, 'error');
+        }
+      } catch (err) {
+        notify('Network error during SMTP verification.', 'error');
+      }
+    }
+
+    // Send Test Pitch to Device Modal Trigger
+    async function executeSendTestPitch() {
+      const recipient = $('test-pitch-recipient').value.trim();
+      if (!recipient || !recipient.includes('@')) {
+        notify('Please enter a valid destination email.', 'error');
+        return;
+      }
+
+      const btn = $('btn-modal-test-dispatch');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i> Dispatching...';
+        lucide.createIcons({ nodes: [btn] });
+      }
+
+      notify(`Sending rendered pitch test to ${recipient}...`, 'info');
+
+      const editorVal = $('comp-template-editor')?.value;
+      const subjInput = $('comp-subject-input');
+      const customSubj = (customSubjectEdited && subjInput) ? subjInput.value : null;
+
+      try {
+        const res = await fetch('/api/test-pitch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            recipient_email: recipient,
+            lead_id: $('comp-lead-select').value || null,
+            template_type: $('comp-template-type').value || 'blog',
+            track_name: $('comp-track-name').value.trim() || null,
+            stream_link: $('comp-stream-link').value.trim() || null,
+            bio_link: $('comp-bio-link').value.trim() || null,
+            custom_subject: customSubj,
+            custom_template: (editorVal && editorVal.trim()) ? editorVal : null
+          })
+        });
+
+        const data = await res.json();
+        if (res.ok && data.status === 'success') {
+          notify(`Pitch delivered to ${recipient}!`, 'success');
+          closeModal('modal-test-pitch');
+        } else {
+          notify(`Failed: ${data.message || 'Check SMTP credentials'}`, 'error');
+        }
+      } catch (err) {
+        notify('Error sending test pitch', 'error');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<i data-lucide="send" class="w-3.5 h-3.5"></i> Dispatch Test';
+          lucide.createIcons({ nodes: [btn] });
+        }
+      }
+    }
+
+    // Verify Notion Connection
+    async function verifyNotionConnection() {
+      notify('Testing Notion API token & database...', 'info');
+      try {
+        const res = await fetch('/api/test-notion', { method: 'POST' });
+        const data = await res.json();
+        if (data.status === 'connected') {
+          notify(`Connected to Notion: "${data.database_name}"`, 'success');
+        } else {
+          notify(`Notion: ${data.message || 'Not connected'}`, 'warning');
+        }
+      } catch (err) {
+        notify('Error testing Notion connection.', 'error');
+      }
+    }
+
+    // Add Lead Form Submission
+    async function submitNewLead() {
+      const name = $('new-lead-name').value.trim();
+      const email = $('new-lead-email').value.trim();
+      const pub = $('new-lead-publication').value.trim();
+      const persona = $('new-lead-persona').value;
+      const work = $('new-lead-work').value.trim();
+
+      if (!name || !email) {
+        notify('Curator name and email are required.', 'error');
+        return;
+      }
+      if (!email.includes('@')) {
+        notify('Enter a valid email address.', 'error');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/leads', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            email,
+            publication: pub || 'Independent',
+            persona: persona,
+            recent_work: work
+          })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          notify(`${name} added to CRM!`, 'success');
+          closeModal('modal-add-curator');
+          ['new-lead-name', 'new-lead-email', 'new-lead-publication', 'new-lead-work'].forEach(id => $(id).value = '');
+          await loadCRMLeads();
+        } else {
+          notify(data.detail || 'Failed to add lead.', 'error');
+        }
+      } catch (err) {
+        notify('Error communicating with CRM.', 'error');
+      }
+    }
+
+    // CSV Bulk Import Submission
+    async function submitCSVImport() {
+      const content = $('csv-import-textarea').value.trim();
+      if (!content) {
+        notify('Please paste valid CSV content.', 'error');
+        return;
+      }
+      if (content.length > 400000) {
+        notify('CSV exceeds 400KB limit.', 'error');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/leads/import-csv', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ csv_content: content })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          notify(data.message || `Imported ${data.imported} curators!`, 'success');
+          closeModal('modal-import-csv');
+          $('csv-import-textarea').value = '';
+          await loadCRMLeads();
+        } else {
+          notify(data.detail || 'CSV import failed.', 'error');
+        }
+      } catch (err) {
+        notify('Error uploading CSV data.', 'error');
+      }
+    }
+
+    // Delete Curator
+    async function deleteCurator(leadId) {
+      if (!confirm('Remove this curator from the CRM pipeline?')) return;
+      try {
+        const res = await fetch(`/api/leads/${leadId}`, { method: 'DELETE' });
+        if (res.ok) {
+          notify('Curator removed from CRM.', 'info');
+          await loadCRMLeads();
+        } else {
+          notify('Could not delete curator.', 'error');
+        }
+      } catch (err) {
+        notify('Network error deleting curator.', 'error');
+      }
+    }
+
+    // Password Visibility Toggle with eye / eye-off switch
+    function togglePasswordVisibility(inputId, btn) {
+      const input = $(inputId);
+      if (!input) return;
+      const isPassword = input.type === 'password';
+      input.type = isPassword ? 'text' : 'password';
+      if (btn) {
+        btn.innerHTML = isPassword 
+          ? '<i data-lucide="eye-off" class="w-4 h-4"></i>'
+          : '<i data-lucide="eye" class="w-4 h-4"></i>';
+        lucide.createIcons({ nodes: [btn] });
+      }
+    }
+
+    // Terminal Logging Console
+    function appendConsoleLog(message, type = 'info') {
+      const consoleEl = $('campaign-console-log');
+      if (!consoleEl) return;
+
+      const time = new Date().toLocaleTimeString('en-US', { hour12: false });
+      const colors = {
+        info: '#94a3b8',
+        success: '#34d399',
+        error: '#f87171',
+        warning: '#fbbf24'
+      };
+
+      const line = document.createElement('p');
+      line.style.color = colors[type] || colors.info;
+      if (type === 'success' || type === 'error') line.style.fontWeight = '600';
+      line.textContent = `[${time}] ${message}`;
+      consoleEl.appendChild(line);
+      consoleEl.scrollTop = consoleEl.scrollHeight;
+    }
+
+    function clearConsoleLog() {
+      const consoleEl = $('campaign-console-log');
+      if (!consoleEl) return;
+      consoleEl.innerHTML = '<p class="text-gray-600">&gt; Console logs cleared.</p>';
+    }
+  </script>
+</body>
+</html>
