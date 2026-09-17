@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PitchFlow — Autonomous Music PR Outreach &amp; Curator CRM</title>
+    <meta
+      name="description"
+      content="PitchFlow is a local-first music PR outreach engine and curator CRM for indie artists and record labels. High deliverability spintax, human-jitter batch dispatcher, automated IMAP reply detection, and Notion CRM sync."
+    />
+    <link rel="icon" type="image/png" href="screenshots/icon.png" />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --bg-soft: #f5f5f7;
+        --ink: #1d1d1f;
+        --ink-2: #424245;
+        --muted: #6e6e73;
+        --hairline: rgba(0, 0, 0, 0.08);
+        --accent: #6366f1;
+        --accent-dark: #4f46e5;
+        --accent-soft: #eef2ff;
+        --radius-lg: 22px;
+        --radius-md: 14px;
+        --shadow-1: 0 8px 30px rgba(0, 0, 0, 0.08);
+        --shadow-2: 0 24px 80px rgba(0, 0, 0, 0.16);
+        --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        * { transition: none !important; animation: none !important; }
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
+          "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        overflow-x: hidden;
+      }
+      .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+      .code-block { overflow-x: auto; max-width: 100%; }
+
+      ::selection { background: var(--accent-soft); color: var(--accent-dark); }
+
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      /* ---------- Nav ---------- */
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        background: rgba(255, 255, 255, 0.82);
+        border-bottom: 1px solid var(--hairline);
+      }
+      .nav-inner {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 24px;
+        height: 54px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .brand { display: flex; align-items: center; gap: 10px; font-weight: 650; color: var(--ink); font-size: 1.02rem; }
+      .brand img { width: 26px; height: 26px; border-radius: 7px; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35); }
+      .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+      .nav-links a { color: var(--ink-2); font-size: 0.86rem; font-weight: 500; transition: color 0.15s ease; }
+      .nav-links a:hover { color: var(--ink); text-decoration: none; }
+      .nav-links a.nav-cta { color: #fff; }
+      .nav-cta {
+        font-size: 0.86rem;
+        font-weight: 500;
+        color: #fff !important;
+        background: var(--accent);
+        padding: 6px 18px;
+        border-radius: 980px;
+        transition: background 0.25s var(--ease), transform 0.2s var(--ease);
+      }
+      .nav-cta:hover { background: var(--accent-dark); transform: translateY(-1px); }
+      @media (max-width: 768px) {
+        .nav-links { display: none; }
+      }
+
+      /* ---------- Layout helpers ---------- */
+      section { position: relative; }
+      .section-label {
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+      }
+      .section-title { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+      .section-sub { color: var(--muted); font-size: 1.15rem; max-width: 620px; margin-top: 14px; }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        text-align: center;
+        padding: 110px 24px 0;
+        background:
+          radial-gradient(1200px 520px at 50% -120px, var(--accent-soft), transparent 70%),
+          var(--bg);
+      }
+      .hero .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--ink-2);
+        background: var(--bg-soft);
+        border: 1px solid var(--hairline);
+        border-radius: 980px;
+        padding: 8px 20px;
+        margin-bottom: 28px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+      }
+      .hero .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: #10b981; animation: pulseDot 2s ease-in-out infinite; }
+      @keyframes pulseDot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+      .hero h1 {
+        font-size: clamp(2.7rem, 6.5vw, 5rem);
+        font-weight: 750;
+        letter-spacing: -0.035em;
+        line-height: 1.05;
+        max-width: 920px;
+        margin: 0 auto;
+      }
+      .hero h1 em {
+        font-style: normal;
+        background: linear-gradient(120deg, #6366f1, #a855f7);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .hero .sub {
+        font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+        color: var(--ink-2);
+        max-width: 660px;
+        margin: 22px auto 0;
+        line-height: 1.45;
+      }
+      .hero .cta-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 36px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 30px;
+        border-radius: 980px;
+        font-size: 1.02rem;
+        font-weight: 500;
+        transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease);
+      }
+      .btn:hover { text-decoration: none; transform: translateY(-1px); }
+      .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3); }
+      .btn-primary:hover { background: var(--accent-dark); color: #fff; }
+      .btn-secondary {
+        background: var(--bg-soft);
+        color: var(--ink);
+        border: 1px solid var(--hairline);
+      }
+      .btn-secondary:hover { background: #ececf0; color: var(--ink); }
+      .hero .meta { margin-top: 22px; font-size: 0.85rem; color: var(--muted); }
+      .hero .meta code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.82rem;
+        background: var(--bg-soft);
+        padding: 3px 8px;
+        border-radius: 6px;
+        border: 1px solid var(--hairline);
+      }
+
+      .hero-stage { position: relative; margin: 60px auto 0; max-width: 1080px; padding: 0 24px 80px; }
+      .hero-stage .glow {
+        position: absolute;
+        inset: -12% 5% 20%;
+        background: radial-gradient(60% 55% at 50% 38%, rgba(99, 102, 241, 0.16), transparent 70%);
+        filter: blur(36px);
+        z-index: 0;
+        pointer-events: none;
+      }
+      .hero-shot {
+        position: relative;
+        z-index: 1;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-2);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        background: #09090e;
+        animation: rise 1.1s var(--ease) both;
+        transform: translateZ(0);
+      }
+      .hero-shot img { width: 100%; height: auto; display: block; }
+      @keyframes rise {
+        from { opacity: 0; transform: translateY(32px) scale(0.985); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      /* ---------- Feature Strip ---------- */
+      .strip {
+        border-top: 1px solid var(--hairline);
+        border-bottom: 1px solid var(--hairline);
+        background: var(--bg-soft);
+        padding: 22px 0;
+      }
+      .strip ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px 44px;
+        color: var(--muted);
+        font-size: 0.88rem;
+        font-weight: 500;
+      }
+      .strip li { display: inline-flex; align-items: center; gap: 8px; }
+      .strip svg { width: 16px; height: 16px; stroke: var(--accent); }
+
+      /* ---------- Showcase ---------- */
+      .showcase { padding: 110px 0 40px; }
+      .showcase-row {
+        display: grid;
+        grid-template-columns: 1.05fr 1fr;
+        align-items: center;
+        gap: 64px;
+        margin-bottom: 120px;
+      }
+      .showcase-row.flip .shot { order: 2; }
+      .showcase-row .copy h3 { font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+      .showcase-row .copy p { color: var(--ink-2); margin-top: 14px; font-size: 1.05rem; line-height: 1.55; }
+      .showcase-row .copy .kicker { color: var(--accent); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+      .shot {
+        position: relative;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-1);
+        border: 1px solid rgba(0, 0, 0, 0.09);
+        overflow: hidden;
+        background: #09090e;
+        transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
+        will-change: transform;
+      }
+      .shot:hover { transform: translateY(-6px) scale(1.012); box-shadow: var(--shadow-2); }
+      .shot img { width: 100%; height: auto; display: block; }
+      @media (max-width: 860px) {
+        .showcase-row, .showcase-row.flip { grid-template-columns: 1fr; gap: 32px; margin-bottom: 80px; }
+        .showcase-row.flip .shot { order: 0; }
+      }
+
+      /* ---------- Features Grid ---------- */
+      .features { padding: 96px 0; background: var(--bg-soft); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+      .features .head { text-align: center; margin-bottom: 64px; }
+      .features .head .section-sub { margin-left: auto; margin-right: auto; }
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--hairline);
+        border-radius: var(--radius-md);
+        padding: 30px 28px;
+        transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
+      }
+      .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-1); border-color: rgba(99, 102, 241, 0.3); }
+      .card .icon {
+        width: 44px; height: 44px;
+        display: grid; place-items: center;
+        border-radius: 12px;
+        background: var(--accent-soft);
+        margin-bottom: 18px;
+      }
+      .card .icon svg { width: 22px; height: 22px; stroke: var(--accent); }
+      .card h4 { font-size: 1.08rem; font-weight: 650; margin-bottom: 8px; }
+      .card p { color: var(--muted); font-size: 0.93rem; line-height: 1.5; }
+
+      /* ---------- Install ---------- */
+      .install { padding: 120px 0; }
+      .install .head { text-align: center; margin-bottom: 56px; }
+      .install .head .section-sub { margin-left: auto; margin-right: auto; }
+      .install-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+      @media (max-width: 860px) {
+        .install-grid { grid-template-columns: 1fr; }
+      }
+      .panel {
+        background: var(--bg-soft);
+        border: 1px solid var(--hairline);
+        border-radius: var(--radius-md);
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+      }
+      .panel h4 { font-size: 1.08rem; font-weight: 650; margin-bottom: 6px; }
+      .panel p { color: var(--muted); font-size: 0.93rem; }
+      .code-wrap { position: relative; margin-top: 18px; }
+      .code-block {
+        background: #0d0e15;
+        color: #f5f5f7;
+        border-radius: 12px;
+        padding: 16px 52px 16px 18px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 0.86rem;
+        line-height: 1.6;
+        overflow-x: auto;
+        white-space: nowrap;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .code-block .prompt { color: #6b7280; user-select: none; }
+      .code-block .cmd { color: #818cf8; }
+      .code-block .subcmd { color: #38bdf8; }
+      .copy-btn {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #d1d5db;
+        transition: background 0.15s ease, color 0.15s ease;
+      }
+      .copy-btn:hover { background: rgba(255, 255, 255, 0.16); color: #ffffff; }
+      .panel .btn { margin-top: 22px; align-self: flex-start; }
+      .install .note { text-align: center; color: var(--muted); font-size: 0.9rem; margin-top: 36px; }
+      .install .note a { color: var(--accent); text-decoration: underline; }
+
+      /* ---------- CTA Band ---------- */
+      .cta-band { background: linear-gradient(180deg, var(--bg-soft), #fff); padding: 110px 24px; text-align: center; }
+      .cta-band h2 { font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; letter-spacing: -0.025em; }
+      .cta-band p { color: var(--muted); font-size: 1.15rem; margin: 16px auto 34px; max-width: 520px; }
+
+      /* ---------- Footer ---------- */
+      footer { border-top: 1px solid var(--hairline); background: var(--bg-soft); padding: 44px 0 60px; }
+      footer .inner { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+      footer .links { display: flex; gap: 28px; font-size: 0.85rem; }
+      footer .links a { color: var(--muted); }
+      footer .links a:hover { color: var(--ink); text-decoration: none; }
+      footer .legal { color: var(--muted); font-size: 0.78rem; text-align: center; line-height: 1.7; }
+      footer .legal a { color: var(--muted); text-decoration: underline; }
+
+      /* ---------- Scroll reveal ---------- */
+      .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+      .reveal.in { opacity: 1; transform: translateY(0); }
+      @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+    </style>
+  </head>
+  <body>
+    <!-- Top Navigation -->
+    <nav>
+      <div class="nav-inner">
+        <a class="brand" href="#top">
+          <img src="screenshots/icon.png" alt="PitchFlow icon" />
+          PitchFlow
+        </a>
+        <ul class="nav-links">
+          <li><a href="#product">Product</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#install">Install</a></li>
+          <li><a href="https://github.com/karan5028ji/pitchflow" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a class="nav-cta" href="#install">Download</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Hero Section -->
+      <header class="hero" id="top">
+        <div class="wrap">
+          <div class="eyebrow"><span class="dot"></span> v1.0.0 · Local-First Music Outreach &amp; Curator CRM</div>
+          <h1>Pitch Curators. Skip Spam.<br /><em>Get Heard.</em></h1>
+          <p class="sub">
+            The private, autonomous outreach engine for indie artists and record labels.
+            Land playlists, press coverage, and blog reviews with anti-hash spintax, human jitter pacing, and automated IMAP reply tracking.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#install">Download for Windows</a>
+            <a class="btn btn-secondary" href="https://github.com/karan5028ji/pitchflow" target="_blank" rel="noopener">
+              View on GitHub
+            </a>
+          </div>
+          <p class="meta">
+            Free &amp; open source · <code>irm …run.ps1 | iex</code> · Zero cloud subscriptions
+          </p>
+        </div>
+        <div class="hero-stage">
+          <div class="glow"></div>
+          <div class="hero-shot">
+            <img src="screenshots/dashboard.png" alt="PitchFlow command center dashboard" width="1920" height="1080" fetchpriority="high" />
+          </div>
+        </div>
+      </header>
+
+      <!-- Trust & Feature Strip -->
+      <div class="strip" aria-hidden="true">
+        <ul>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Human Jitter Delivery (3–7 min)
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Weekend Inbox Protection
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            IMAP Auto-Blacklisting
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Spintax Anti-Hash Rotation
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            100% Private &amp; Local
+          </li>
+        </ul>
+      </div>
+
+      <!-- Product Showcase -->
+      <section class="showcase" id="product">
+        <div class="wrap">
+          <!-- Row 1: Dashboard -->
+          <div class="showcase-row reveal">
+            <div class="copy">
+              <div class="kicker">Command Center</div>
+              <h3>Outreach metrics that drive real music placements.</h3>
+              <p>
+                Monitor your full campaign pipeline in real time. Track open rates with invisible 1x1 pixels, monitor positive replies, and enforce daily send caps against Gmail SMTP thresholds so your sender domain always stays healthy.
+              </p>
+            </div>
+            <div class="shot">
+              <img src="screenshots/dashboard.png" alt="PitchFlow Analytics Dashboard" loading="lazy" width="1920" height="1080" />
+            </div>
+          </div>
+
+          <!-- Row 2: CRM Kanban -->
+          <div class="showcase-row flip reveal">
+            <div class="copy">
+              <div class="kicker">Curator CRM</div>
+              <h3>Visual Kanban for journalists, playlisters, and A&amp;Rs.</h3>
+              <p>
+                Organize every music contact through To Contact, Sent, Opened, Replied, Follow-up, and Blacklisted stages. Search across publications, filter by target personas, or batch-import contacts directly from CSV.
+              </p>
+            </div>
+            <div class="shot">
+              <img src="screenshots/crm-kanban.png" alt="PitchFlow Visual Curator CRM" loading="lazy" width="1920" height="1080" />
+            </div>
+          </div>
+
+          <!-- Row 3: Spintax Composer -->
+          <div class="showcase-row reveal">
+            <div class="copy">
+              <div class="kicker">Pitch Composer</div>
+              <h3>Unique pitches for every recipient. No spam hashes.</h3>
+              <p>
+                Dynamic spintax rotates subject lines, compliments, and streaming links so every curator receives a customized, natural message. Live Apple Mail and Gmail preview lets you inspect the rendered output and test-dispatch to your own device.
+              </p>
+            </div>
+            <div class="shot">
+              <img src="screenshots/composer.png" alt="PitchFlow Spintax Composer" loading="lazy" width="1920" height="1080" />
+            </div>
+          </div>
+
+          <!-- Row 4: Dispatcher -->
+          <div class="showcase-row flip reveal">
+            <div class="copy">
+              <div class="kicker">Intelligent Dispatcher</div>
+              <h3>Human-like pacing with anti-spam safeguards.</h3>
+              <p>
+                Outreach shouldn't look like a machine. PitchFlow introduces randomized 3–7 minute intervals between emails and automatically holds batches over weekends to prevent Monday morning trash pile-ups.
+              </p>
+            </div>
+            <div class="shot">
+              <img src="screenshots/dispatcher.png" alt="PitchFlow Intelligent Batch Dispatcher" loading="lazy" width="1920" height="1080" />
+            </div>
+          </div>
+
+          <!-- Row 5: Settings -->
+          <div class="showcase-row reveal">
+            <div class="copy">
+              <div class="kicker">Credential Vault</div>
+              <h3>Zero .env hassle. Configured and verified in 60s.</h3>
+              <p>
+                Configure your artist profile, Gmail App Password, and optional Notion CRM database directly in the interface. Built-in SMTP and Notion diagnostic buttons test your live connection before sending a single pitch.
+              </p>
+            </div>
+            <div class="shot">
+              <img src="screenshots/settings.png" alt="PitchFlow Credential Vault and Settings" loading="lazy" width="1920" height="1080" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Grid -->
+      <section class="features" id="features">
+        <div class="wrap">
+          <div class="head reveal">
+            <div class="section-label">Core Capabilities</div>
+            <h2 class="section-title">Engineered for music tastemakers.</h2>
+            <p class="section-sub">
+              Fast enough to launch in seconds. Safe enough to protect your reputation for years.
+            </p>
+          </div>
+          <div class="feature-grid">
+            <div class="card reveal">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <h4>Spintax Variation Engine</h4>
+              <p>Randomized sentence permutations prevent ESP finger-printing and spam blacklists. Every curator receives a distinct email.</p>
+            </div>
+            <div class="card reveal">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <h4>Weekend Inbox Blocker</h4>
+              <p>Automatic Saturday &amp; Sunday suppression avoids Monday morning inbox purge routines, maximizing open rates on Tuesdays.</p>
+            </div>
+            <div class="card reveal">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+              </div>
+              <h4>IMAP Opt-Out &amp; Reply Detector</h4>
+              <p>Scans your inbox to automatically celebrate positive replies and instantaneously blacklists contacts requesting removal.</p>
+            </div>
+            <div class="card reveal">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <h4>Attachment Safety Filter</h4>
+              <p>Protects you from spam traps by enforcing streaming URLs and cloud EPK kits instead of heavy MP3 attachments.</p>
+            </div>
+            <div class="card reveal">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              </div>
+              <h4>Notion CRM Dual-Sync</h4>
+              <p>Optionally syncs your contacts and campaign updates directly to your Notion workspace for team-wide collaboration.</p>
+            </div>
+            <div class="card reveal">
+              <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              </div>
+              <h4>100% Local &amp; Private</h4>
+              <p>Zero telemetry. Runs locally via Python FastAPI with SQLite storage. Your contacts and credentials never leave your PC.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Install Section -->
+      <section class="install" id="install">
+        <div class="wrap">
+          <div class="head reveal">
+            <div class="section-label">Launch</div>
+            <h2 class="section-title">Up and running in one line.</h2>
+            <p class="section-sub">
+              No complex setup, no monthly subscriptions. Run the portable one-liner or grab the standalone package.
+            </p>
+          </div>
+          <div class="install-grid">
+            <!-- Panel 1: PowerShell 1-liner -->
+            <div class="panel reveal">
+              <h4>Portable — One Line (PowerShell)</h4>
+              <p>Clones, initializes dependencies, and opens the local dashboard automatically.</p>
+              <div class="code-wrap">
+                <div class="code-block" id="ps-cmd">
+                  <span class="prompt">PS&gt;</span> <span class="cmd">irm</span> https://raw.githubusercontent.com/karan5028ji/pitchflow/main/run.ps1 <span class="subcmd">|</span> iex
+                </div>
+                <button class="copy-btn" onclick="copyCode('ps-cmd', this)" title="Copy command" aria-label="Copy PowerShell command">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+              <a class="btn btn-primary" href="https://github.com/karan5028ji/pitchflow/releases/latest" target="_blank" rel="noopener">Download v1.0.0 Portable (.zip)</a>
+            </div>
+
+            <!-- Panel 2: Git Developer Setup -->
+            <div class="panel reveal">
+              <h4>Developer &amp; Power User</h4>
+              <p>Clone directly, customize pitch templates, or deploy via Docker container.</p>
+              <div class="code-wrap">
+                <div class="code-block" id="git-cmd">
+                  <span class="prompt">$</span> <span class="cmd">git</span> clone https://github.com/karan5028ji/pitchflow.git
+                </div>
+                <button class="copy-btn" onclick="copyCode('git-cmd', this)" title="Copy command" aria-label="Copy Git command">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+              <a class="btn btn-secondary" href="https://github.com/karan5028ji/pitchflow" target="_blank" rel="noopener">View Source Repository</a>
+            </div>
+          </div>
+          <p class="note">
+            Requires Python 3.10+ and Windows PowerShell. Released under the <a href="https://github.com/karan5028ji/pitchflow/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>.
+          </p>
+        </div>
+      </section>
+
+      <!-- Bottom Call to Action -->
+      <section class="cta-band">
+        <div class="reveal">
+          <h2>Give your music the press it deserves.</h2>
+          <p>Free. Open source. Local-first. Built for real indie artists.</p>
+          <a class="btn btn-primary" href="#install">Get PitchFlow Now</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="wrap inner">
+        <div class="links">
+          <a href="https://github.com/karan5028ji/pitchflow" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/karan5028ji/pitchflow/releases" target="_blank" rel="noopener">Releases</a>
+          <a href="https://github.com/karan5028ji/pitchflow/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+          <a href="https://github.com/karan5028ji/pitchflow/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Contributing</a>
+        </div>
+        <p class="legal">
+          &copy; 2026 PitchFlow. Crafted for independent artists, producers &amp; record labels.
+        </p>
+      </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+      (function () {
+        // Scroll Reveal Animations
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if (!reduce && "IntersectionObserver" in window) {
+          var targets = document.querySelectorAll(".reveal");
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("in");
+                  io.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.05, rootMargin: "0px 0px 80px 0px" }
+          );
+          targets.forEach(function (el) { io.observe(el); });
+        } else {
+          document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
+        }
+      })();
+
+      // Copy to Clipboard
+      function copyCode(elemId, btn) {
+        var el = document.getElementById(elemId);
+        if (!el) return;
+        var text = el.innerText.replace(/^PS>\s*|^\$\s*/, '').trim();
+        navigator.clipboard.writeText(text).then(function () {
+          var oldHtml = btn.innerHTML;
+          btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+          setTimeout(function () { btn.innerHTML = oldHtml; }, 2000);
+        });
+      }
+    </script>
+  </body>
+</html>
