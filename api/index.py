@@ -28,13 +28,12 @@ from src.orchestrator import OutreachOrchestrator
 
 app = FastAPI(title="PitchFlow — Music PR Outreach & Curator CRM", version="1.0.0")
 
-# SECURITY FIX: Restrict CORS to localhost only.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8000", "http://127.0.0.1:8000"],
+    allow_origins=["*"],
     allow_credentials=False,
-    allow_methods=["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
-    allow_headers=["Content-Type"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # 1x1 transparent PNG payload (43 bytes)
@@ -83,11 +82,16 @@ def process_lead_open(lead_id: str, user_agent: str, client_ip: str):
 
 @app.get("/", response_class=HTMLResponse)
 def serve_ui():
-    index_file = os.path.join(WEB_DIR, "index.html")
-    if os.path.exists(index_file):
-        with open(index_file, "r", encoding="utf-8") as f:
-            return f.read()
-    return "<h1>PR Outreach Automator</h1><p>Web UI file not found in web/index.html</p>"
+    candidates = [
+        os.path.join(WEB_DIR, "index.html"),
+        os.path.join(os.getcwd(), "web", "index.html"),
+        os.path.join(os.path.dirname(__file__), "..", "web", "index.html"),
+    ]
+    for p in candidates:
+        if os.path.exists(p):
+            with open(p, "r", encoding="utf-8") as f:
+                return f.read()
+    return "<h1>PitchFlow</h1><p>Web UI file not found in web/index.html</p>"
 
 @app.get("/favicon.ico")
 def favicon():

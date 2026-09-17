@@ -270,5 +270,39 @@
     "message_id": null,
     "thread_id": null,
     "custom_notes": null
+  },
+  {
+    "id": "local_4d706bb8",
+    "name": "Journalist",
+    "email": "curator1_1789654661358@music.test",
+    "publication": "Beat Mag",
+    "persona": "Journalist",
+    "recent_work": "new beats",
+    "status": "To Contact",
+    "send_count": 0,
+    "sent_at": null,
+    "open_count": 0,
+    "last_opened_at": null,
+    "replied_at": null,
+    "message_id": null,
+    "thread_id": null,
+    "custom_notes": null
+  },
+  {
+    "id": "local_c9064882",
+    "name": "Playlist Curator",
+    "email": "curator2_1789654661358@music.test",
+    "publication": "Chill Playlist",
+    "persona": "Journalist",
+    "recent_work": "lo-fi vibe",
+    "status": "To Contact",
+    "send_count": 0,
+    "sent_at": null,
+    "open_count": 0,
+    "last_opened_at": null,
+    "replied_at": null,
+    "message_id": null,
+    "thread_id": null,
+    "custom_notes": null
   }
 ]
