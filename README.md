@@ -4,6 +4,7 @@
 
 **Autonomous Cold Email Outreach Engine & Tastemaker CRM for Independent Musicians, Producers & Labels**
 
+[![Website](https://img.shields.io/badge/website-pitchflow.live-emerald)](https://karan5028ji.github.io/pitchflow/)
 [![Version](https://img.shields.io/badge/version-1.0.0-indigo)](https://github.com/karan5028ji/pitchflow/releases)
 [![CI](https://github.com/karan5028ji/pitchflow/actions/workflows/ci.yml/badge.svg)](https://github.com/karan5028ji/pitchflow/actions)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue)](https://github.com/karan5028ji/pitchflow)
