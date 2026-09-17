@@ -1,5 +1,8 @@
 import unittest
-from starlette.testclient import TestClient
+try:
+    from fastapi.testclient import TestClient
+except Exception:
+    from starlette.testclient import TestClient
 from api.index import app
 from src.config_store import ConfigStore
 

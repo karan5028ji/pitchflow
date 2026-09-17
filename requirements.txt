@@ -17,5 +17,7 @@ google-auth-httplib2>=0.2.0
 fastapi>=0.109.0
 uvicorn>=0.27.0
 
-# Testing
+# Testing & Client
 pytest>=7.4.0
+httpx>=0.27.0
+httpx2>=2.0.0
