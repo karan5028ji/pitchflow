@@ -10,7 +10,7 @@ class TestWebAPI(unittest.TestCase):
     def test_ui_serves_html(self):
         resp = self.client.get("/")
         self.assertEqual(resp.status_code, 200)
-        self.assertIn("Kxrn PR Outreach Studio", resp.text)
+        self.assertIn("PitchFlow", resp.text)
         self.assertIn("<!DOCTYPE html>", resp.text)
 
     def test_get_and_update_config(self):

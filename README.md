@@ -1,6 +1,6 @@
-# Kxrn PR Studio — Cupertino Edition 🎵✉️
+# PitchFlow — Autonomous Music PR Studio 🎵✉️
 
-> **The God-Tier Music PR & Automated Outreach Engine**  
+> **The God-Tier Cold Outreach & Curator CRM for Indie Artists & Labels**  
 > Crafted with Apple Human Interface Guidelines (HIG) aesthetics, intelligent CRM pipelines, deliverability safeguards, and zero-setup configuration.
 
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://python.org)
@@ -13,7 +13,7 @@
 
 ## 🌟 Overview
 
-**Kxrn PR Studio** is a modern, enterprise-grade cold email automation suite and visual CRM designed specifically for independent music artists, managers, and labels. It replaces costly, complex SaaS platforms (like Lemlist, Mailchimp, or Woodpecker) while landing directly into the **Primary Inbox** using genuine Gmail SMTP delivery, randomized human-jitter dispatching, and invisible 1x1 open-tracking pixels.
+**PitchFlow** is a modern, enterprise-grade cold email automation suite and visual CRM designed specifically for independent music artists, managers, and labels. It replaces costly, complex SaaS platforms (like Lemlist, Mailchimp, or Woodpecker) while landing directly into the **Primary Inbox** using genuine Gmail SMTP delivery, randomized human-jitter dispatching, and invisible 1x1 open-tracking pixels.
 
 Every setting, credential, pitch template, and curator contact can be managed entirely through the interactive Web Dashboard — **no `.env` file editing or terminal restarts required.**
 
@@ -58,7 +58,7 @@ Every setting, credential, pitch template, and curator contact can be managed en
 
 ```
                                   +-----------------------------+
-                                  |   Kxrn PR Studio Web UI     |
+                                  |      PitchFlow Web UI         |
                                   |   (Cupertino Glassmorphism) |
                                   +--------------+--------------+
                                                  |

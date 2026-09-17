@@ -1,6 +1,6 @@
-# Contributing to Kxrn PR Studio
+# Contributing to PitchFlow
 
-Thank you for your interest in contributing to **Kxrn PR Studio**! We welcome improvements to the engine, UI, deliverability safeguards, and CRM integrations.
+Thank you for your interest in contributing to **PitchFlow**! We welcome improvements to the engine, UI, deliverability safeguards, and CRM integrations.
 
 ---
 
@@ -8,8 +8,8 @@ Thank you for your interest in contributing to **Kxrn PR Studio**! We welcome im
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/pr-outreach-automator.git
-   cd pr-outreach-automator
+   git clone https://github.com/your-username/pitchflow.git
+   cd pitchflow
    ```
 
 2. **Create a virtual environment**:

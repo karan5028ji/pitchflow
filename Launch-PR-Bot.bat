@@ -1,7 +1,7 @@
 @echo off
-title Kxrn PR Outreach Studio
+title PitchFlow Studio
 echo ===================================================
-echo   Starting Kxrn PR Outreach Studio (Web Dashboard)
+echo   Starting PitchFlow Studio (Web Dashboard)
 echo ===================================================
 echo.
 cd /d "%~dp0"

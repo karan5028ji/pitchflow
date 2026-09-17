@@ -12,7 +12,7 @@ from src.crm.schemas import Lead
 from config.settings import settings
 
 app = typer.Typer(
-    help="PR Outreach Automator (Kxrn Edition) - Music PR & Cold Pitching Engine",
+    help="PitchFlow - Autonomous Music PR & Cold Pitching Engine",
     add_completion=False
 )
 console = Console(highlight=False)
@@ -150,7 +150,7 @@ def gui(
     import time
 
     url = f"http://localhost:{port}"
-    console.print(f"[bold green]Starting Kxrn PR Outreach Studio on {url}...[/bold green]")
+    console.print(f"[bold green]Starting PitchFlow Studio on {url}...[/bold green]")
 
     if not no_browser:
         def _open():

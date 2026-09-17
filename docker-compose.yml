@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  pr-studio:
+  pitchflow:
     build: .
-    container_name: kxrn-pr-studio
+    container_name: pitchflow-studio
     restart: unless-stopped
     ports:
       - "8000:8000"

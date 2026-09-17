@@ -1,4 +1,4 @@
-# Production Dockerfile for Kxrn PR Outreach Studio
+# Production Dockerfile for PitchFlow Studio
 FROM python:3.11-slim
 
 # Set environment variables

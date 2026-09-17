@@ -26,7 +26,7 @@ from src.inbox.reply_detector import ReplyDetector
 from src.notifications.telegram_notifier import TelegramNotifier
 from src.orchestrator import OutreachOrchestrator
 
-app = FastAPI(title="PR Outreach Automator & CRM (Kxrn Edition)", version="2.2.0")
+app = FastAPI(title="PitchFlow — Music PR Outreach & Curator CRM", version="1.0.0")
 
 # SECURITY FIX: Restrict CORS to localhost only.
 app.add_middleware(
@@ -97,7 +97,7 @@ def favicon():
 def health_check():
     return {
         "status": "ok",
-        "service": "PR Outreach Tracking Server (Kxrn Edition)",
+        "service": "PitchFlow PR Outreach Engine",
         "is_weekend": RateLimiter.is_weekend(),
     }
 
