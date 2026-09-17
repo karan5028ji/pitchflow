@@ -1,151 +1,119 @@
-# PitchFlow — Autonomous Music PR Studio 🎵✉️
+<div align="center">
 
-> **The God-Tier Cold Outreach & Curator CRM for Indie Artists & Labels**  
-> Crafted with Apple Human Interface Guidelines (HIG) aesthetics, intelligent CRM pipelines, deliverability safeguards, and zero-setup configuration.
+# 🎵 PitchFlow Studio ✉️
 
-[![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688.svg)](https://fastapi.tiangolo.com)
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)](https://docker.com)
-[![Tests](https://img.shields.io/badge/Tests-19%2F19%20Passing-emerald.svg)](tests/)
-[![License](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
+**Autonomous Cold Email Outreach Engine & Tastemaker CRM for Independent Musicians, Producers & Labels**
 
----
+[![Version](https://img.shields.io/badge/version-1.0.0-indigo)](https://github.com/karan5028ji/pitchflow/releases)
+[![CI](https://github.com/karan5028ji/pitchflow/actions/workflows/ci.yml/badge.svg)](https://github.com/karan5028ji/pitchflow/actions)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue)](https://github.com/karan5028ji/pitchflow)
+[![Built With](https://img.shields.io/badge/built%20with-FastAPI%20%26%20Tailwind-009688)](https://fastapi.tiangolo.com)
+[![Docker](https://img.shields.io/badge/docker-ready-2496ED)](docker-compose.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-purple)](LICENSE)
 
-## 🌟 Overview
+> ⚠️ **Deliverability Rule:** Never attach heavy raw MP3 files or press PDFs directly to cold outreach emails. Gmail algorithms aggressively filter cold attachments into Spam. **PitchFlow** enforces cloud press kits (EPK) and private streaming links to maximize **Primary Inbox** placement.
 
-**PitchFlow** is a modern, enterprise-grade cold email automation suite and visual CRM designed specifically for independent music artists, managers, and labels. It replaces costly, complex SaaS platforms (like Lemlist, Mailchimp, or Woodpecker) while landing directly into the **Primary Inbox** using genuine Gmail SMTP delivery, randomized human-jitter dispatching, and invisible 1x1 open-tracking pixels.
-
-Every setting, credential, pitch template, and curator contact can be managed entirely through the interactive Web Dashboard — **no `.env` file editing or terminal restarts required.**
+</div>
 
 ---
 
-## ✨ Key Features
+## ✨ What is it?
 
-### 🎨 Apple Cupertino Human Interface Design
-- **Obsidian Dark Canvas & Frosted Glass**: Built on a luxury `#060609` obsidian palette with multi-layered translucency (`backdrop-filter: blur(28px) saturate(190%)`).
-- **Apple Typography Stack**: Native San Francisco and Inter typographic hierarchy with calibrated letter tracking.
-- **Fluid Micro-Interactions**: Tactile button presses, smooth segmented navigation, mobile-responsive sliding drawer, and password visibility toggles.
+**PitchFlow** is a modern, enterprise-grade cold email automation tool and visual CRM tailored specifically for music artists, managers, and labels. It replaces costly subscription tools (like Lemlist, Mailchimp, or Woodpecker) while landing directly into the **Primary Inbox** using genuine Gmail SMTP delivery, randomized human-jitter dispatching, and invisible 1x1 open-tracking pixels.
 
-### ✍️ Interactive Pitch Composer & Template Studio
-- **Dual-Mode Workspace**: Seamlessly switch between **Live Preview** (Apple/Gmail simulation with 1x1 tracking pixel indicator) and **Edit Pitch & Template**.
-- **Live Editable Subject Line**: Refine headline hooks directly in the previewer with instant token interpolation.
-- **Quick-Insert Token Chips**: One-click tags for `{{First_Name}}`, `{{Track_Name}}`, `{{Stream_Link}}`, `{{Artist_Bio_Link}}`, `{{Publication}}`, `{{Recent_Article}}`, and `{Spintax}`.
-- **Persistent Template Management**: Save custom templates permanently to disk or reset back to stock in one click.
-
-### 📋 Universal Clipboard & Multi-Delimiter CSV Import
-- **Google Sheets & Excel Ready**: Automatically detects tab delimiters (`\t`) when copying directly from spreadsheets, as well as commas, semicolons, and pipes.
-- **Fuzzy Header Matching**: Case-insensitive matching for `Name`, `Email`, `Publication`, `Persona`, and `Recent Work`.
-- **Headerless Extraction**: Scans unformatted rows and extracts valid email addresses automatically.
-- **Smart Lead Enrichment**: Duplicate contacts are updated with newly provided articles and outlets instead of being skipped.
-
-### 🛑 Deliverability Safeguards & Weekend Blocker
-- **The Weekend Blocker**: Automatically pauses batch dispatch and follow-ups on Saturdays and Sundays to prevent pitches from being buried in Monday morning trash. Includes a manual override toggle.
-- **Human Jitter Simulation**: Randomized 3 to 7 minute delays between successive emails to mimic authentic human sending behavior.
-- **Daily Quota Management**: Enforces strict configurable daily send caps (default: 30/day) with real-time visual progress gauges.
-- **Anti-Attachment Shield**: Promotes deliverability by steering users toward cloud press kits and private streaming links instead of heavy MP3 attachments.
-
-### 🚫 IMAP Opt-Out & Auto-Blacklisting Engine
-- Scans incoming replies in real-time via Gmail IMAP.
-- Detects opt-out keywords (`"unsubscribe"`, `"remove me"`, `"pass"`, `"stop emailing"`) and automatically transitions the contact to **Blacklisted 🚫** to safeguard domain health.
-
-### 🔐 Zero-Setup In-App Credential Vault
-- Enter Gmail address, Google App Password, and Notion API credentials directly inside the UI.
-- **Instant SMTP Verification**: Automatically saves newly entered credentials and dispatches a live diagnostic test email to your Gmail address with one click.
+Every setting, credential, pitch template, and curator contact is configured directly through an **Apple Cupertino HIG** web interface — **no manual `.env` file editing or terminal restarts required.**
 
 ---
 
-## 🏗️ Architecture
+## 🖼 Screenshots
 
-```
-                                  +-----------------------------+
-                                  |      PitchFlow Web UI         |
-                                  |   (Cupertino Glassmorphism) |
-                                  +--------------+--------------+
-                                                 |
-                                     REST API / WebSockets
-                                                 |
-                                  +--------------v--------------+
-                                  |     FastAPI Orchestrator    |
-                                  +---+----------+----------+---+
-                                      |          |          |
-            +-------------------------+          |          +-------------------------+
-            |                                    |                                    |
-+-----------v-----------+            +-----------v-----------+            +-----------v-----------+
-|    Config Vault       |            |   Dispatch Engine     |            |      CRM Storage      |
-|  (data/app_config)    |            |  - Spintax Generator  |            |  - Local JSON Store   |
-|  - Gmail SMTP / IMAP  |            |  - Human Jitter Delays|            |  - Notion Cloud Sync  |
-|  - Quota Safeguards   |            |  - Weekend Blocker    |            |  - Pipeline Kanban    |
-+-----------------------+            +-----------+-----------+            +-----------------------+
-                                                 |
-                                  +--------------v--------------+
-                                  |   Gmail SMTP & Vercel Pixel |
-                                  |   Tracking & IMAP Scanner   |
-                                  +-----------------------------+
+| Dashboard | CRM Pipeline (Kanban) |
+|:---:|:---:|
+| <a href="docs/screenshots/dashboard.png"><img src="docs/screenshots/dashboard.png" alt="PitchFlow Dashboard" width="500"></a> | <a href="docs/screenshots/crm-kanban.png"><img src="docs/screenshots/crm-kanban.png" alt="CRM Pipeline Kanban" width="500"></a> |
+
+| Live Pitch Composer & Template Studio | Batch Dispatcher & Execution Console |
+|:---:|:---:|
+| <a href="docs/screenshots/composer.png"><img src="docs/screenshots/composer.png" alt="Pitch Composer" width="500"></a> | <a href="docs/screenshots/dispatcher.png"><img src="docs/screenshots/dispatcher.png" alt="Batch Dispatcher" width="500"></a> |
+
+| In-App Credential Vault & Settings |
+|:---:|
+| <a href="docs/screenshots/settings.png"><img src="docs/screenshots/settings.png" alt="Settings Vault" width="500"></a> |
+
+---
+
+## 🚀 Quick Install
+
+### ⚡ The Fastest Way (1-Line PowerShell Launch)
+Run one line in Windows PowerShell — no manual repo cloning or environment setup required:
+
+```powershell
+irm https://raw.githubusercontent.com/karan5028ji/pitchflow/main/run.ps1 | iex
 ```
 
 ---
 
-## 🚀 Quickstart Guide
-
-### Option 1: 1-Click Windows Launcher
-Double-click:
+### 💻 Option 2: 1-Click Desktop Launcher
+Clone or download the repository, then double-click:
 ```text
 Launch-PR-Bot.bat
 ```
-Your browser will automatically launch **`http://localhost:8000`**.
+Your browser will automatically open: **`http://localhost:8000`**
 
 ---
 
-### Option 2: Run via Python CLI
-1. **Clone & enter repository**:
-   ```bash
-   git clone https://github.com/your-username/pr-outreach-automator.git
-   cd pr-outreach-automator
-   ```
-
-2. **Create & activate virtual environment**:
-   ```bash
-   python -m venv venv
-   # Windows:
-   .\venv\Scripts\activate
-   # macOS / Linux:
-   source venv/bin/activate
-   ```
-
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Start the studio**:
-   ```bash
-   python main.py gui
-   ```
-
----
-
-### Option 3: Docker & Docker Compose
-Run the entire studio in an isolated container:
+### 🐳 Option 3: Docker Compose
+Run PitchFlow in an isolated container:
 ```bash
 docker compose up -d
 ```
-Access the studio at `http://localhost:8000`.
+Access the dashboard at `http://localhost:8000`.
+
+---
+
+### 🐍 Option 4: Manual Python CLI
+```bash
+git clone https://github.com/karan5028ji/pitchflow.git
+cd pitchflow
+
+# Create and activate virtual environment
+python -m venv venv
+.\venv\Scripts\activate   # On Windows
+source venv/bin/activate  # On macOS/Linux
+
+# Install dependencies and launch
+pip install -r requirements.txt
+python main.py gui
+```
+
+---
+
+## 🆕 What's New in v1.0.0
+
+| Feature | Description |
+|:---|:---|
+| 🎨 **Cupertino Design Overhaul** | High-ticket frosted glassmorphism (`backdrop-filter: blur(28px)`), Apple SF font stack, tactile button micro-interactions, and mobile responsive navigation. |
+| ✍️ **Pitch Composer & Editor** | Dual-mode segmented control: *Live Preview* vs. *Edit Pitch & Template* with editable subject lines and quick-insert variable chips (`{{First_Name}}`, `{{Track_Name}}`, etc.). |
+| 📋 **Universal CSV & Clipboard Import** | Auto-detects Excel/Google Sheets tabs (`\t`), commas, semicolons, and lowercase headers. Duplicates auto-update existing leads instead of failing. |
+| 🛑 **The Weekend Blocker** | Automatically pauses campaigns on Saturdays and Sundays to prevent pitches from being buried in Monday morning trash. Includes a manual override toggle. |
+| 🧪 **Test Mode (Send to Self)** | Instantly send a diagnostic preview pitch to your own phone or secondary inbox (Yahoo/Outlook) with live Spintax and tracking pixels before launching. |
+| 🚫 **Opt-Out & Blacklist Scanner** | Scans replies via IMAP for negative keywords (`"unsubscribe"`, `"remove me"`, `"pass"`) and automatically transitions leads to `Blacklisted` to protect sender reputation. |
+| 🔐 **Instant SMTP Verification** | Entering your Gmail address and App Password in the Settings tab immediately tests and delivers a diagnostic email to yourself with 1-click feedback. |
 
 ---
 
 ## ⚙️ In-App Setup in 60 Seconds
 
-1. Open the **Settings** tab in the web dashboard.
+1. Open the **Settings** tab in the dashboard.
 2. Enter your **Artist / Sender Name** and **Gmail Address**.
 3. Enter your 16-letter **Google App Password** ([Generate one in Google Account Security](https://myaccount.google.com/apppasswords)).
 4. Click **"Verify SMTP (Send Test Email)"** — check your inbox for the immediate green diagnostic email.
-5. (Optional) Toggle **Notion CRM** if syncing with a cloud workspace.
+5. *(Optional)* Toggle **Notion CRM** if you want to synchronize with a cloud Notion board. Otherwise, the offline JSON database runs out-of-the-box!
 6. Set your song release details (Track Name, Spotify Link, EPK Link).
 7. Click **"Save All Changes"**. You're ready to pitch!
 
 ---
 
-## 📁 Repository Structure
+## 📁 Project Architecture
 
 ```
 pr-outreach-automator/
@@ -171,10 +139,14 @@ pr-outreach-automator/
 │   ├── app_config.example.json    # Sanitized configuration template
 │   ├── local_leads.json           # Offline CRM lead database
 │   └── imports/                   # Sample Apollo / spreadsheet CSV exports
+├── docs/
+│   └── screenshots/               # High-res screenshots for documentation
 ├── tests/                         # Full automated test suite (19 unit tests)
+├── .github/
+│   └── workflows/ci.yml           # Automated multi-python GitHub Actions testing
 ├── Dockerfile                     # Multi-stage production container
 ├── docker-compose.yml             # Single-command container orchestration
-├── vercel.json                    # 1-command deployment configuration for tracking pixel
+├── run.ps1                        # 1-click PowerShell runner
 ├── Launch-PR-Bot.bat              # 1-click Windows desktop launcher
 ├── requirements.txt               # Main Python dependencies
 └── main.py                        # Studio CLI & GUI entry point
@@ -184,7 +156,7 @@ pr-outreach-automator/
 
 ## 💻 CLI Commands Reference
 
-Prefer working in the terminal? Every GUI feature is accessible via CLI:
+Every web feature is also available through the terminal:
 
 | Command | Description |
 |---|---|
@@ -208,7 +180,7 @@ python -m unittest discover tests
 ```
 
 ```text
-Ran 19 tests in 3.471s - OK
+Ran 19 tests in 3.492s - OK
 ```
 *Tests cover: Spintax parsing & permutations, variable interpolation, MIME email dispatching, 1x1 pixel tracking, weekend detection, rate limits, CSV multi-delimiter ingestion, and REST API routes.*
 
@@ -216,10 +188,10 @@ Ran 19 tests in 3.471s - OK
 
 ## 🔒 Security & Privacy
 
-- **No Remote Credential Storage**: All Google App Passwords and API tokens are stored locally on your machine in `data/app_config.json`.
-- **Git-Ignored Secrets**: `data/app_config.json` is strictly git-ignored to prevent accidental commits to public repositories.
+- **Zero Remote Credential Exposure**: All Google App Passwords and API tokens are stored locally on your machine in `data/app_config.json`.
+- **Strictly Git-Ignored**: `data/app_config.json` is protected in `.gitignore` to prevent any credential leaks when pushing to public repositories.
 - **Restricted CORS**: API endpoints are locked to localhost origins to defend against cross-origin browser attacks.
-- **HTML Sanitization**: All user-rendered strings in the CRM and console are sanitized to prevent XSS.
+- **Sanitized Rendering**: All user-rendered strings in the CRM and console are escaped to prevent XSS.
 
 ---
 
@@ -227,4 +199,4 @@ Ran 19 tests in 3.471s - OK
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Developed with ❤️ for independent musicians and indie record labels.
+Developed with ❤️ for independent musicians and indie record labels by **Kxrn Gupta**.
